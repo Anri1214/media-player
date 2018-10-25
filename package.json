@@ -1,10 +1,10 @@
 {
-  "name": "project-scaffoldings",
+  "name": "media-player",
   "version": "1.0.0",
-  "description": "",
+  "description": "Media Player Hotkey",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack/webpack.dev.js --open HOST=0.0.0.0",
+    "start": "webpack-dev-server --config ./webpack/webpack.dev.js --open",
     "test": "jest",
     "lint": "eslint ./src",
     "lint:watch": "esw --watch",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/front-camp-2018/project-scaffoldings.git"
+    "url": "git+https://github.com/Anri1214/media-player.git"
   },
-  "author": "",
+  "author": "Andriy Kutsyk",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/front-camp-2018/project-scaffoldings/issues"
+    "url": "https://github.com/Anri1214/media-player/issues"
   },
-  "homepage": "https://github.com/front-camp-2018/project-scaffoldings#readme",
+  "homepage": "https://github.com/Anri1214/media-player#readme",
   "devDependencies": {
     "css-loader": "^1.0.0",
     "eslint": "^5.6.1",
