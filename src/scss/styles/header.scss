@@ -1,0 +1,17 @@
+@import '../scripts/constants';
+@import '../scripts/mixins';
+
+.mp-header {
+  & .mp-navtop {
+    @include flex();
+
+    background-color: $nav-background;
+    border-left: $nav-border;
+    border-right: $nav-border;
+    border-top: $nav-border;
+    border-radius: $nav-top-radius;
+    color: #fff;
+    flex-direction: row;
+    height: $nav-height;
+  }
+}

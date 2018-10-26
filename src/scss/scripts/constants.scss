@@ -1,0 +1,23 @@
+$nav-background: #2f364a;
+$nav-border: 1px solid #000;
+$nav-height: 40px;
+$nav-size: 15px;
+$nav-bottom-radius: 0 0 .75rem .75rem;
+$nav-top-radius: .75rem .75rem 0 0;
+
+$aside-border: 5px solid #{$nav-background};
+$aside-height: calc(100vh - #{$nav-height} * 2 - #{$nav-size} * 2);
+$aside-media-bg-width: 70%;
+$aside-media-sm-width: 30%;
+
+$asideleft-action-height: 80px;
+$asideleft-width: 70%;
+
+$asideright-settings-font: 16px;
+$asideright-settings-row-height: 30px;
+$asideright-settings-row-padding: 5px;
+$asideright-settings-title: 40px;
+$asideright-settings-content: calc(100vh - #{$nav-size} * 2 - #{$nav-height} * 2 - #{$asideright-settings-title} - #{$asideright-settings-row-height} - #{$asideright-settings-row-padding} * 3 - #{$asideleft-action-height});
+$asideright-settings-media-bg-height: 260px;
+$asideright-settings-media-sm-height: 230px;
+$asideright-settings-media-xs-height: 160px;

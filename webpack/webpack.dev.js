@@ -4,9 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: [
-    './src/main.js',
-    './src/index.css',
-    './src/scss/styles.scss',
+    './src/main.js'
   ],
   output: {
     filename: 'bundle.js',
@@ -24,7 +22,7 @@ module.exports = {
         use: []
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.scss$/,
         use: [
           {
             loader: 'style-loader' // creates style nodes from JS strings
@@ -32,9 +30,9 @@ module.exports = {
           {
             loader: 'css-loader', // translates CSS into CommonJS
             query: {
-              modules: true,
+              //modules: true,
               camelCase: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
+              //localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
           {

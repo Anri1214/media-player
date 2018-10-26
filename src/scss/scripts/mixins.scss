@@ -1,0 +1,34 @@
+@import './constants';
+
+@mixin button ($font, $size) {
+  background-color: Transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: $font;
+  height: $size;
+  width: $size;
+
+  &:hover {
+    background-color: #00008b;
+    color: #fff;
+  }
+}
+
+@mixin flex ($align: center, $content: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $content;
+}
+
+@mixin asideleft-height ($height) {
+  height: calc(#{$aside-height} - #{$height});
+}
+
+@mixin asideleft-screen-height ($height) {
+  height: calc(#{$aside-height} - #{$nav-size} - #{$height});
+}
+
+@mixin asideright-body-height ($row) {
+  height: calc(#{$asideright-settings-media-sm-height} - #{$nav-size} * 2 - #{$asideright-settings-title} - #{$asideright-settings-row-height} - #{$asideright-settings-row-padding} * #{$row});
+}

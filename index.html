@@ -1,34 +1,163 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-        integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-        crossorigin="anonymous">
-  <title>Media Player Hotkey</title>
-</head>
-<body>
-<div class="mp-container">
-  <header class="mp-container__header">
-    <nav class="mp-navtop">
-      <div class="mp-navtop__title">
-        <i class="fas fa-video"></i> Media Player Hotkey
-      </div>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+    <title>Media Player Hotkey</title>
+  </head>
+  <body>
+    <div class="mp-container">
+      <header class="mp-header">
+        <nav class="mp-navtop">
+          <div class="mp-navtop__title">
+            <i class="fas fa-video"></i> Media Player Hotkey
+          </div>
+        </nav>
+      </header>
+      <main class="mp-main">
+        <aside class="mp-asideleft">
+          <div class="mp-asideleft__screen">
 
-  <main class="mp-container__main">
-
-  </main>
-
-  <footer class="mp-container__footer">
-
-  </footer>
-</div>
-</body>
+          </div>
+          <div class="mp-asideleft__action">
+            <button class="mp-asideleft__action--button">
+              <i class="fas fa-play"></i>
+            </button>
+            <button class="mp-asideleft__action--button">
+              <i class="fas fa-pause"></i>
+            </button>
+            <button class="mp-asideleft__action--button">
+              <i class="fas fa-stop"></i>
+            </button>
+            <button class="mp-asideleft__action--button">
+              <i class="fas fa-eject"></i>
+            </button>
+          </div>
+        </aside>
+        <aside class="mp-asideright">
+          <div class="mp-asideright__settings">
+            <h1 class="mp-asideright__settings--title">Settings:</h1>
+            <table class="mp-asideright__settings--table">
+              <thead class="mp-asideright__settings--table-head">
+                <tr class="mp-asideright__settings--table-row">
+                  <th class="mp-asideright__settings--table-row-1">Action</th>
+                  <th class="mp-asideright__settings--table-row-2">Hotkey</th>
+                  <th class="mp-asideright__settings--table-row-3">Edit</th>
+                </tr>
+              </thead>
+              <tbody class="mp-asideright__settings--table-body">
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Open File</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "O"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Play</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "P"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Pause</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "SPACE"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Stop</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "S"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Speed +</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "E"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Speed -</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "W"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Next Frame</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "N"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Previous Frame</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "R"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Turbo Speed</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "T"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mp-asideright__settings--table-row-1">Normal Speed</td>
+                  <td class="mp-asideright__settings--table-row-2">Key "D"</td>
+                  <td class="mp-asideright__settings--table-row-3">
+                    <button class="mp-asideright__settings--table-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mp-asideright__info">
+            <h1>INFO</h1>
+          </div>
+        </aside>
+      </main>
+      <footer class="mp-footer">
+        <div class="mp-navbottom">
+          <div class="pl-navbottom__copyright">
+            <i class="fas fa-copyright"></i> Created by Anri1214
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>

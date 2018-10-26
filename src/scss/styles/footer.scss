@@ -1,0 +1,21 @@
+@import '../scripts/constants';
+@import '../scripts/mixins';
+
+.mp-footer {
+  & .mp-navbottom {
+    border-bottom: $nav-border;
+    border-left: $nav-border;
+    border-right: $nav-border;
+
+    @include flex();
+
+    background-color: $nav-background;
+    border-radius: $nav-bottom-radius;
+    bottom: $nav-size;
+    color: #fff;
+    flex-direction: row;
+    position: absolute;
+    height: $nav-height;
+    width: calc(100% - #{$nav-size} * 2);
+  }
+}

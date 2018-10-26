@@ -1,0 +1,278 @@
+@import '../scripts/constants';
+@import '../scripts/extends';
+@import '../scripts/mixins';
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.mp-main {
+  background-color: #fff;
+  border-left: $nav-border;
+  border-right: $nav-border;
+  display: flex;
+  flex-wrap: wrap;
+
+  & .mp-asideleft {
+    border-left: $aside-border;
+    border-right: $aside-border;
+    display: flex;
+    flex-direction: column;
+    height: $aside-height;
+    width: $asideleft-width;
+
+    &__action {
+      @include flex();
+
+      flex-wrap: wrap;
+      height: $asideleft-action-height;
+
+      &--button {
+        @include button(28px, 55px);
+        @include flex();
+
+        margin: 0 5px;
+      }
+    }
+
+    &__screen {
+      @include flex();
+
+      background-color: #000;
+      height: calc(100vh - #{$asideleft-action-height});
+      margin: #{$nav-size} #{$nav-size} 0 #{$nav-size};
+    }
+  }
+
+  & .mp-asideright {
+    border-right: $aside-border;
+    display: flex;
+    flex-direction: column;
+    height: $aside-height;
+    padding: #{$nav-size} #{$nav-size} 0;
+    width: calc(100% - #{$asideleft-width});
+
+    &__settings {
+      width: 100%;
+
+      &--title {
+        @include flex(flex-start, center);
+
+        height: $asideright-settings-title;
+      }
+
+      &--table {
+        border-collapse: collapse;
+        font-size: $asideright-settings-font;
+        table-layout: fixed;
+        width: 100%;
+
+        &-body {
+          display: block;
+          height: $asideright-settings-content;
+          overflow-x: hidden;
+          overflow-y: auto;
+          width: 100%;
+        }
+
+        &-head {
+          background-color: $nav-background;
+          color: #fff;
+        }
+
+        &-button {
+          @include button($asideright-settings-font, 32px);
+          @include flex();
+
+          margin: auto;
+        }
+
+        &-row {
+          display: block;
+        }
+
+        &-row-1 {
+          @extend %table-row;
+
+          width: 300px;
+        }
+
+        &-row-2 {
+          @extend %table-row;
+
+          width: 200px;
+        }
+
+        &-row-3 {
+          @extend %table-row;
+
+          width: 100px;
+        }
+      }
+    }
+
+    &__info {
+      @include flex();
+
+      animation: blinker 1s linear infinite;
+      color: #f00;
+      height: $asideleft-action-height;
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    & .mp-asideleft {
+      @include asideleft-height($asideright-settings-media-sm-height);
+
+      flex-direction: row;
+      width: 100%;
+
+      &__action {
+        height: 100%;
+        margin-top: $nav-size;
+        width: $aside-media-sm-width;
+      }
+
+      &__screen {
+        @include asideleft-screen-height($asideright-settings-media-sm-height);
+
+        margin-right: 0;
+        width: $aside-media-bg-width;
+      }
+    }
+
+    & .mp-asideright {
+      border-left: $aside-border;
+      flex-direction: row;
+      height: $asideright-settings-media-sm-height;
+      padding-right: 0;
+      width: 100%;
+
+      &__settings {
+        width: $aside-media-bg-width;
+
+        &--table {
+          &-body {
+            @include asideright-body-height(2);
+          }
+
+          &-row-1 {
+            width: 450px;
+          }
+
+          &-row-2 {
+            width: 300px;
+          }
+
+          &-row-3 {
+            width: 150px;
+          }
+        }
+      }
+
+      &__info {
+        height: 100%;
+        width: $aside-media-sm-width;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    & .mp-asideleft {
+      @include asideleft-height($asideright-settings-media-bg-height);
+
+      &__screen {
+        @include asideleft-screen-height($asideright-settings-media-bg-height);
+
+        width: $aside-media-bg-width;
+      }
+    }
+
+    & .mp-asideright {
+      flex-direction: column;
+      height: $asideright-settings-media-bg-height;
+      padding-right: $nav-size;
+
+      &__settings {
+        width: 100%;
+      }
+
+      &__info {
+        width: 100%;
+      }
+    }
+  }
+
+  @media only screen and (max-height: 650px) {
+    & .mp-asideleft {
+      &__action {
+        &--button {
+          @include button(20px, 45px);
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-height: 500px) {
+    & .mp-asideleft {
+      @include asideleft-height($asideright-settings-media-xs-height);
+
+      flex-direction: column;
+
+      &__action {
+        height: 80px;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+
+      &__screen {
+        @include asideleft-screen-height($asideright-settings-media-xs-height);
+
+        margin: #{$nav-size} #{$nav-size} 0 #{$nav-size};
+        width: calc(100% - #{$nav-size} * 2);
+      }
+    }
+
+    & .mp-asideright {
+      height: $asideright-settings-media-xs-height;
+      padding-top: 0;
+
+      &__settings {
+        &--table {
+          &-body {
+            @include asideright-body-height(13);
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-height: 400px) {
+    & .mp-asideleft {
+      @include asideleft-height($asideright-settings-title);
+
+      &__screen {
+        @include asideleft-screen-height($asideright-settings-title);
+      }
+    }
+
+    & .mp-asideright {
+      height: $asideright-settings-title;
+
+      &__settings {
+        width: 100%;
+
+        &--table {
+          display: none;
+        }
+      }
+
+      &__info {
+        display: none;
+      }
+    }
+  }
+}

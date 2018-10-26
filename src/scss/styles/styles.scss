@@ -1,0 +1,11 @@
+@import '../scripts/constants';
+@import 'reset';
+@import 'header';
+@import 'main';
+@import 'footer';
+
+.mp-container {
+  background-color: #a2a2a2;
+  height: 100%;
+  padding: $nav-size;
+}
