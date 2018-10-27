@@ -23,20 +23,21 @@
       </header>
       <main class="mp-main">
         <aside class="mp-asideleft">
+          <input id="file-input" type="file" class="mp-asideleft__file">
           <div class="mp-asideleft__screen">
-
+            <video id="video-container" class="mp-asideleft__screen--video"></video>
           </div>
           <div class="mp-asideleft__action">
-            <button class="mp-asideleft__action--button">
+            <button id="play-btn" class="mp-asideleft__action--button">
               <i class="fas fa-play"></i>
             </button>
-            <button class="mp-asideleft__action--button">
+            <button id="pause-btn" class="mp-asideleft__action--button">
               <i class="fas fa-pause"></i>
             </button>
-            <button class="mp-asideleft__action--button">
+            <button id="stop-btn" class="mp-asideleft__action--button">
               <i class="fas fa-stop"></i>
             </button>
-            <button class="mp-asideleft__action--button">
+            <button id="open-btn" class="mp-asideleft__action--button">
               <i class="fas fa-eject"></i>
             </button>
           </div>
@@ -44,110 +45,19 @@
         <aside class="mp-asideright">
           <div class="mp-asideright__settings">
             <h1 class="mp-asideright__settings--title">Settings:</h1>
-            <table class="mp-asideright__settings--table">
+            <table id="settings-table" class="mp-asideright__settings--table">
               <thead class="mp-asideright__settings--table-head">
                 <tr class="mp-asideright__settings--table-row">
-                  <th class="mp-asideright__settings--table-row-1">Action</th>
-                  <th class="mp-asideright__settings--table-row-2">Hotkey</th>
-                  <th class="mp-asideright__settings--table-row-3">Edit</th>
+                  <th class="mp-asideright__settings--table-col-1">Action</th>
+                  <th class="mp-asideright__settings--table-col-2">Hotkey</th>
+                  <th class="mp-asideright__settings--table-col-3">Edit</th>
                 </tr>
               </thead>
-              <tbody class="mp-asideright__settings--table-body">
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Open File</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "O"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Play</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "P"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Pause</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "SPACE"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Stop</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "S"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Speed +</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "E"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Speed -</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "W"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Next Frame</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "N"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Previous Frame</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "R"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Turbo Speed</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "T"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="mp-asideright__settings--table-row-1">Normal Speed</td>
-                  <td class="mp-asideright__settings--table-row-2">Key "D"</td>
-                  <td class="mp-asideright__settings--table-row-3">
-                    <button class="mp-asideright__settings--table-button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody class="mp-asideright__settings--table-body"></tbody>
             </table>
           </div>
           <div class="mp-asideright__info">
-            <h1>INFO</h1>
+            <h1 id="info-text">INFO</h1>
           </div>
         </aside>
       </main>

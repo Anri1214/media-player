@@ -37,12 +37,21 @@
       }
     }
 
+    &__file {
+      display: none;
+    }
+
     &__screen {
       @include flex();
 
       background-color: #000;
       height: calc(100vh - #{$asideleft-action-height});
       margin: #{$nav-size} #{$nav-size} 0 #{$nav-size};
+
+      &--video {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
 
@@ -93,19 +102,19 @@
           display: block;
         }
 
-        &-row-1 {
+        &-col-1 {
           @extend %table-row;
 
           width: 300px;
         }
 
-        &-row-2 {
+        &-col-2 {
           @extend %table-row;
 
           width: 200px;
         }
 
-        &-row-3 {
+        &-col-3 {
           @extend %table-row;
 
           width: 100px;
@@ -158,15 +167,15 @@
             @include asideright-body-height(2);
           }
 
-          &-row-1 {
+          &-col-1 {
             width: 450px;
           }
 
-          &-row-2 {
+          &-col-2 {
             width: 300px;
           }
 
-          &-row-3 {
+          &-col-3 {
             width: 150px;
           }
         }

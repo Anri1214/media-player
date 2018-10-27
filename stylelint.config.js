@@ -4,6 +4,9 @@ module.exports = {
   ],
   plugins: [],
   rules: {
+    'at-rule-no-unknown': [true, {
+      ignoreAtRules: ['function', 'if', 'each', 'extend', 'include', 'mixin']
+    }],
     indentation: 2,
     "number-leading-zero": null,
     "selector-pseudo-class-no-unknown": [true, {
