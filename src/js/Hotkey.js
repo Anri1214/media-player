@@ -14,7 +14,7 @@ const CONFIG = {
       label: 'Play'
     },
     pause: {
-      code: 32,
+      code: 76,
       label: 'Pause'
     },
     stop: {
@@ -26,7 +26,7 @@ const CONFIG = {
       label: 'Restart'
     },
     fullScreen: {
-      code: 13,
+      code: 70,
       label: 'Full Screen'
     },
     normalScreen: {
@@ -56,6 +56,18 @@ const CONFIG = {
     prevFrame: {
       code: 82,
       label: 'Previous Frame'
+    },
+    incVolume: {
+      code: 86,
+      label: 'Volume +'
+    },
+    decVolume: {
+      code: 66,
+      label: 'Volume -'
+    },
+    muted: {
+      code: 77,
+      label: 'Muted'
     }
   },
   index: ['label', 'code', 'action']
@@ -224,18 +236,32 @@ const KEYBOARD_CODE = {
 };
 
 /**
+ * @const {Array} RESERVED_KEYS (List with reserved keyboard keys)
+ */
+const RESERVED_KEYS = [9, 13, 20, 27, 32, 35, 36, 40, 112, 114, 116, 117, 122, 123];
+
+/**
  * @const {Symbol} (Hotkey class private properties)
  */
 const _config = Symbol('config');
+const _editMode = Symbol('editMode');
+const _infoText = Symbol('infoText');
+const _keys = Symbol('keys');
+const _main = Symbol('main');
+const _mouseEvent = Symbol('mouseEvent');
 const _table = Symbol('table');
+const _tablePrefix = Symbol('tablePrefix');
 
 /**
  * @const {Symbol} (Hotkey class private methods)
  */
 const _addHotkeyListener = Symbol('addHotkeyListener');
+const _changeHotkey = Symbol('changeHotkey');
 const _initCallback = Symbol('initCallback');
 const _initProps = Symbol('initProps');
 const _initTable = Symbol('initTable');
+const _initTableEvents = Symbol('initTableEvents');
+const _replaceHotkey = Symbol('replaceHotkey');
 
 /**
  * @class Hotkey (Base class working with hotkey configuration)
@@ -245,6 +271,7 @@ export class Hotkey {
     this.media = new Media();
     this[_initProps]();
     this[_initTable]();
+    this[_initTableEvents]();
     this[_initCallback]();
     this[_addHotkeyListener]();
   }
@@ -253,13 +280,47 @@ export class Hotkey {
    * @method add hotkey event listener
    */
   [_addHotkeyListener] () {
-    document.addEventListener('keyup', e => {
-      Object.values(this[_config].action).forEach(item => {
-        if (item.code === e.keyCode) {
-          item.callback();
+    document.addEventListener('keyup', event => {
+      if (this[_editMode]) {
+        const $info = this[_infoText];
+        const $main = this[_main];
+        const code = event.keyCode;
+        const find = this[_keys].find(key => key === code);
+
+        switch (true) {
+          case code === 27:
+            this[_editMode] = false;
+            $info.innerHTML = '';
+            $main.classList.remove('edit-mode');
+            break;
+          case find !== undefined:
+            $info.innerHTML = 'Key is used or reserved';
+            break;
+          default:
+            this[_replaceHotkey](event);
+            $main.classList.remove('edit-mode');
         }
-      });
+      } else {
+        Object.values(this[_config].action).forEach(item => {
+          if (item.code === event.keyCode) {
+            item.callback();
+          }
+        });
+      }
     });
+  }
+
+  /**
+   * @function change hotkey value
+   *
+   * @param {Object} event (Button click event)
+   */
+  [_changeHotkey] (event) {
+    this[_editMode] = true;
+    this[_infoText].innerHTML = 'Select New Key';
+    this[_main].classList.add('edit-mode');
+    this[_mouseEvent] = event;
+    document.activeElement.blur();
   }
 
   /**
@@ -277,19 +338,27 @@ export class Hotkey {
    * @method initialization Hotkey class properties
    */
   [_initProps] () {
+    this[_changeHotkey] = this[_changeHotkey].bind(this);
     this[_config] = CONFIG;
+    this[_editMode] = false;
+    this[_infoText] = document.getElementById('info-text');
+    this[_keys] = RESERVED_KEYS;
+    this[_main] = document.getElementById('main');
+    this[_mouseEvent] = null;
+    this[_replaceHotkey] = this[_replaceHotkey].bind(this);
     this[_table] = document.getElementById('settings-table');
+    this[_tablePrefix] = 'mp-asideright__settings--table';
   }
 
   /**
-   * @method initialization table row
+   * @method initialization table content
    */
   [_initTable] () {
     const config = this[_config];
+    const prefix = this[_tablePrefix];
 
     Object.keys(config.action).forEach(key => {
       const $row = this[_table].getElementsByTagName('tbody')[0].insertRow(-1);
-      const prefix = 'mp-asideright__settings--table';
       const val = config.action[key];
 
       for (let i = 0; i <= 2 ; i++) {
@@ -304,6 +373,7 @@ export class Hotkey {
                                </button>`;
             break;
           case 'code':
+            RESERVED_KEYS.push(item);
             $cell.innerHTML = `Key "${KEYBOARD_CODE[item]}"`;
             break;
           case 'label':
@@ -314,5 +384,39 @@ export class Hotkey {
         $cell.setAttribute('class', `${prefix}-col-${i + 1}`);
       }
     });
+  }
+
+  /**
+   * @method initialization table button events
+   */
+  [_initTableEvents] () {
+    const btns = document.getElementsByClassName(`${this[_tablePrefix]}-button`);
+
+    Object.values(btns).forEach(btn => {
+      btn.onclick = this[_changeHotkey];
+    });
+  }
+
+  /**
+   * @function replace hotkey value in configuration
+   *
+   * @param {Object} event (Hotkey event)
+   */
+  [_replaceHotkey] (event) {
+    const $mouse = this[_mouseEvent];
+    const $target = $mouse.target;
+    const code = event.keyCode;
+    const find = $mouse.path.find(elem => elem.tagName === 'TR');
+    const id = $target.id || $target.parentElement.id;
+    const keys = this[_keys];
+    const config = this[_config].action[id];
+    const index = keys.indexOf(config.code);
+
+    config.code = code;
+    find.children[1].innerHTML = `Key "${KEYBOARD_CODE[code]}"`;
+    keys.splice(index, 1);
+    keys.push(code);
+    this[_editMode] = false;
+    this[_infoText].innerHTML = '';
   }
 }

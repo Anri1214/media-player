@@ -55,6 +55,10 @@
     }
   }
 
+  &.edit-mode {
+    background-color: #ffbffb;
+  }
+
   & .mp-asideright {
     border-right: $aside-border;
     display: flex;
@@ -128,6 +132,10 @@
       animation: blinker 1s linear infinite;
       color: #f00;
       height: $asideleft-action-height;
+
+      &--item {
+        text-align: center;
+      }
     }
   }
 

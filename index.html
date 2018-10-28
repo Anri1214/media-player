@@ -21,23 +21,23 @@
           </div>
         </nav>
       </header>
-      <main class="mp-main">
+      <main id="main" class="mp-main">
         <aside class="mp-asideleft">
           <input id="file-input" type="file" class="mp-asideleft__file">
           <div class="mp-asideleft__screen">
             <video id="video-container" class="mp-asideleft__screen--video"></video>
           </div>
           <div class="mp-asideleft__action">
-            <button id="play-btn" class="mp-asideleft__action--button">
+            <button id="play-btn" class="mp-asideleft__action--button" title="Play" disabled>
               <i class="fas fa-play"></i>
             </button>
-            <button id="pause-btn" class="mp-asideleft__action--button">
+            <button id="pause-btn" class="mp-asideleft__action--button" title="Pause" disabled>
               <i class="fas fa-pause"></i>
             </button>
-            <button id="stop-btn" class="mp-asideleft__action--button">
+            <button id="stop-btn" class="mp-asideleft__action--button" title="Stop" disabled>
               <i class="fas fa-stop"></i>
             </button>
-            <button id="open-btn" class="mp-asideleft__action--button">
+            <button id="open-btn" class="mp-asideleft__action--button" title="Open">
               <i class="fas fa-eject"></i>
             </button>
           </div>
@@ -57,7 +57,7 @@
             </table>
           </div>
           <div class="mp-asideright__info">
-            <h1 id="info-text">INFO</h1>
+            <h1 id="info-text" class="mp-asideright__info--item"></h1>
           </div>
         </aside>
       </main>

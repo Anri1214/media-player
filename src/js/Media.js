@@ -13,9 +13,18 @@ const FILE_TYPES = [
 const SPEED = {
   max: 12,
   min: 0,
-  mute: 3,
+  muted: 3,
   normal: 1,
   step: 0.5
+};
+
+/**
+ * @const {Object} VOLUME (Media player volume parameters)
+ */
+const VOLUME = {
+  max: 1,
+  min: 0,
+  step: 0.1
 };
 
 /**
@@ -32,6 +41,8 @@ const _video = Symbol('video');
 /**
  * @const {Symbol} (Media class private methods)
  */
+const _disableBtns = Symbol('disableBtns');
+const _enableBtns = Symbol('enableBtns');
 const _initAttrs = Symbol('initAttr');
 const _initEvents = Symbol('initEvents');
 const _initProps = Symbol('initProps');
@@ -40,6 +51,7 @@ const _setFrame = Symbol('setFrame');
 const _setScreen = Symbol('setScreen');
 const _setSource = Symbol('setSource');
 const _setSpeed = Symbol('setSpeed');
+const _setVolume = Symbol('setVolume');
 const _validType = Symbol('validType');
 
 /**
@@ -117,6 +129,7 @@ export class Media {
    */
   open () {
     this[_fileInput].click();
+    document.activeElement.blur();
   }
 
   /**
@@ -124,13 +137,19 @@ export class Media {
    */
   pause () {
     this[_video].pause();
+    this[_disableBtns]([this[_pauseBtn]]);
+    this[_enableBtns]([this[_playBtn]]);
   }
 
   /**
    * @method play video
    */
   play () {
+    const btns = [this[_pauseBtn], this[_stopBtn]];
+
     this[_video].play();
+    this[_disableBtns]([this[_playBtn]]);
+    this[_enableBtns](btns);
   }
 
   /**
@@ -144,8 +163,59 @@ export class Media {
    * @method stop video and rewind to start
    */
   stop () {
+    const btns = [this[_pauseBtn], this[_stopBtn]];
+
     this.pause();
     this.restart();
+    this[_disableBtns](btns);
+    this[_enableBtns]([this[_playBtn]]);
+  }
+
+  /**
+   * @method decrease video volume
+   */
+  decVolume () {
+    const $volume = this[_video].volume;
+
+    this[_setVolume]($volume - VOLUME.step);
+  }
+
+  /**
+   * @method increase video volume
+   */
+  incVolume () {
+    const $volume = this[_video].volume;
+
+    this[_setVolume]($volume + VOLUME.step);
+  }
+
+  /**
+   * @method enable or disable volume
+   */
+  muted () {
+    const $video = this[_video];
+
+    if ($video.playbackRate <= SPEED.muted) {
+      this[_video].muted = !this[_video].muted;
+    }
+  }
+
+  /**
+   * @method disable button
+   *
+   * @param {Array} btns (List with disable button elements)
+   */
+  [_disableBtns] (btns) {
+    btns.forEach(btn => btn.setAttribute('disabled', 'disabled'));
+  }
+
+  /**
+   * @method enable button
+   *
+   * @param {Array} btns (List with enable button elements)
+   */
+  [_enableBtns] (btns) {
+    btns.forEach(btn => btn.removeAttribute('disabled'));
   }
 
   /**
@@ -201,6 +271,9 @@ export class Media {
     this.pause = this.pause.bind(this);
     this.restart = this.restart.bind(this);
     this.stop = this.stop.bind(this);
+    this.decVolume = this.decVolume.bind(this);
+    this.incVolume = this.incVolume.bind(this);
+    this.muted = this.muted.bind(this);
   }
 
   /**
@@ -209,11 +282,10 @@ export class Media {
    * @param {int} val (Frame value)
    */
   [_setFrame] (val) {
-    const $video = this[_video];
-    const frame = 1 / 29.97;
+    const frame = 1 / 24;
 
     this.pause();
-    $video.currentTime += frame * val;
+    this[_video].currentTime += frame * val;
   }
 
   /**
@@ -264,7 +336,7 @@ export class Media {
     const $video = this[_video];
 
     if ($video.src) {
-      $video.muted = val > SPEED.mute;
+      $video.muted = val > SPEED.muted;
 
       switch (true) {
         case val < SPEED.min:
@@ -277,7 +349,29 @@ export class Media {
           $video.playbackRate = val;
       }
 
-      this[_infoText].innerHTML = `Video Speed x${$video.playbackRate}`;
+      const rate = $video.playbackRate;
+
+      this[_infoText].innerHTML = rate !== 1 ? `Video Speed x${rate}` : '';
+    }
+  }
+
+  /**
+   * @method set media player volume
+   *
+   * @param {int} val (Volume value)
+   */
+  [_setVolume] (val) {
+    const $video = this[_video];
+
+    switch (true) {
+      case val < VOLUME.min:
+        $video.volume = VOLUME.min;
+        break;
+      case val > VOLUME.max:
+        $video.volume = VOLUME.max;
+        break;
+      default:
+        $video.volume = val;
     }
   }
 

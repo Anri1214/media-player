@@ -10,8 +10,15 @@
   width: $size;
 
   &:hover {
-    background-color: #00008b;
-    color: #fff;
+    &:enabled {
+      background-color: #00008b;
+      color: #fff;
+    }
+
+    &:disabled {
+      border: 3px solid #d3d3d3;
+      cursor: not-allowed;
+    }
   }
 }
 
