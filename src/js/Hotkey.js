@@ -1,4 +1,4 @@
-import { Media } from './media';
+import { Media } from './Media';
 
 /**
  * @const {Object} CONFIG (Default hotkey configuration)
