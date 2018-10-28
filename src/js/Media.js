@@ -157,6 +157,7 @@ export class Media {
    */
   restart () {
     this[_video].currentTime = 0;
+    this.play();
   }
 
   /**
