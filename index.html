@@ -23,28 +23,15 @@
           </div>
         </nav>
       </header>
-      <main id="main" class="mp-main">
-        <aside class="mp-asideleft">
+      <main id="main" class="mp-main mp-browser">
+        <aside id="asideleft" class="mp-asideleft">
           <input id="file-input" type="file" class="mp-asideleft__file">
           <div class="mp-asideleft__screen">
             <video id="video-container" class="mp-asideleft__screen--video"></video>
           </div>
-          <div class="mp-asideleft__action">
-            <button id="play-btn" class="mp-asideleft__action--button" title="Play" disabled>
-              <i class="fas fa-play"></i>
-            </button>
-            <button id="pause-btn" class="mp-asideleft__action--button" title="Pause" disabled>
-              <i class="fas fa-pause"></i>
-            </button>
-            <button id="stop-btn" class="mp-asideleft__action--button" title="Stop" disabled>
-              <i class="fas fa-stop"></i>
-            </button>
-            <button id="open-btn" class="mp-asideleft__action--button" title="Open">
-              <i class="fas fa-eject"></i>
-            </button>
-          </div>
+          <div id="action-btns" class="mp-asideleft__action"></div>
         </aside>
-        <aside class="mp-asideright">
+        <aside id="asideright" class="mp-asideright">
           <div class="mp-asideright__settings">
             <h1 class="mp-asideright__settings--title">Settings:</h1>
             <table id="settings-table" class="mp-asideright__settings--table">
