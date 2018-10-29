@@ -138,9 +138,21 @@
       }
     }
   }
+}
 
-  @media only screen and (max-width: 1100px) {
-    & .mp-asideleft {
+.mp-mobile {
+  & .mp-asideleft {
+    width: 100%;
+  }
+
+  & .mp-asideright {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .mp-browser {
+    .mp-asideleft {
       @include asideleft-height($asideright-settings-media-sm-height);
 
       flex-direction: row;
@@ -160,7 +172,7 @@
       }
     }
 
-    & .mp-asideright {
+    .mp-asideright {
       border-left: $aside-border;
       flex-direction: row;
       height: $asideright-settings-media-sm-height;
@@ -195,9 +207,11 @@
       }
     }
   }
+}
 
-  @media only screen and (max-width: 600px) {
-    & .mp-asideleft {
+@media only screen and (max-width: 600px) {
+  .mp-browser {
+    .mp-asideleft {
       @include asideleft-height($asideright-settings-media-bg-height);
 
       &__screen {
@@ -207,7 +221,7 @@
       }
     }
 
-    & .mp-asideright {
+    .mp-asideright {
       flex-direction: column;
       height: $asideright-settings-media-bg-height;
       padding-right: $nav-size;
@@ -221,9 +235,11 @@
       }
     }
   }
+}
 
-  @media only screen and (max-height: 650px) {
-    & .mp-asideleft {
+@media only screen and (max-height: 650px) {
+  .mp-browser {
+    .mp-asideleft {
       &__action {
         &--button {
           @include button(20px, 45px);
@@ -231,9 +247,11 @@
       }
     }
   }
+}
 
-  @media only screen and (max-height: 500px) {
-    & .mp-asideleft {
+@media only screen and (max-height: 500px) and (max-width: 1100px) {
+  .mp-browser {
+    .mp-asideleft {
       @include asideleft-height($asideright-settings-media-xs-height);
 
       flex-direction: column;
@@ -253,7 +271,7 @@
       }
     }
 
-    & .mp-asideright {
+    .mp-asideright {
       height: $asideright-settings-media-xs-height;
       padding-top: 0;
 
@@ -266,9 +284,11 @@
       }
     }
   }
+}
 
-  @media only screen and (max-height: 400px) {
-    & .mp-asideleft {
+@media only screen and (max-height: 400px) and (max-width: 1100px) {
+  .mp-browser {
+    .mp-asideleft {
       @include asideleft-height($asideright-settings-title);
 
       &__screen {
@@ -276,7 +296,7 @@
       }
     }
 
-    & .mp-asideright {
+    .mp-asideright {
       height: $asideright-settings-title;
 
       &__settings {

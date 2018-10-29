@@ -9,9 +9,13 @@
   height: $size;
   width: $size;
 
+  &.hidden {
+    display: none;
+  }
+
   &:hover {
     &:enabled {
-      background-color: #00008b;
+      background-color: $nav-background;
       color: #fff;
     }
 

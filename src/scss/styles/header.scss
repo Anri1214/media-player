@@ -10,8 +10,23 @@
     border-right: $nav-border;
     border-top: $nav-border;
     border-radius: $nav-top-radius;
-    color: #fff;
     flex-direction: row;
     height: $nav-height;
+
+    &__title {
+      &--item {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+          color: #ff5757;
+          text-decoration: underline;
+
+          & .fas {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
   }
 }

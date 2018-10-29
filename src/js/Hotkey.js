@@ -1,3 +1,4 @@
+import { Device } from './Device';
 import { Media } from './Media';
 
 /**
@@ -268,70 +269,13 @@ const _replaceHotkey = Symbol('replaceHotkey');
  */
 export class Hotkey {
   constructor () {
+    this.device = new Device();
     this.media = new Media();
     this[_initProps]();
     this[_initTable]();
     this[_initTableEvents]();
     this[_initCallback]();
     this[_addHotkeyListener]();
-  }
-
-  /**
-   * @method add hotkey event listener
-   */
-  [_addHotkeyListener] () {
-    document.addEventListener('keyup', event => {
-      if (this[_editMode]) {
-        const $info = this[_infoText];
-        const $main = this[_main];
-        const code = event.keyCode;
-        const find = this[_keys].find(key => key === code);
-
-        switch (true) {
-          case code === 27:
-            this[_editMode] = false;
-            $info.innerHTML = '';
-            $main.classList.remove('edit-mode');
-            break;
-          case find !== undefined:
-            $info.innerHTML = 'Key is used or reserved';
-            break;
-          default:
-            this[_replaceHotkey](event);
-            $main.classList.remove('edit-mode');
-        }
-      } else {
-        Object.values(this[_config].action).forEach(item => {
-          if (item.code === event.keyCode) {
-            item.callback();
-          }
-        });
-      }
-    });
-  }
-
-  /**
-   * @function change hotkey value
-   *
-   * @param {Object} event (Button click event)
-   */
-  [_changeHotkey] (event) {
-    this[_editMode] = true;
-    this[_infoText].innerHTML = 'Select New Key';
-    this[_main].classList.add('edit-mode');
-    this[_mouseEvent] = event;
-    document.activeElement.blur();
-  }
-
-  /**
-   *
-   */
-  [_initCallback] () {
-    const config = this[_config].action;
-
-    Object.keys(config).forEach(key => {
-      config[key].callback = this.media[key];
-    });
   }
 
   /**
@@ -348,6 +292,17 @@ export class Hotkey {
     this[_replaceHotkey] = this[_replaceHotkey].bind(this);
     this[_table] = document.getElementById('settings-table');
     this[_tablePrefix] = 'mp-asideright__settings--table';
+  }
+
+  /**
+   *
+   */
+  [_initCallback] () {
+    const config = this[_config].action;
+
+    Object.keys(config).forEach(key => {
+      config[key].callback = this.media[key];
+    });
   }
 
   /**
@@ -395,6 +350,53 @@ export class Hotkey {
     Object.values(btns).forEach(btn => {
       btn.onclick = this[_changeHotkey];
     });
+  }
+
+  /**
+   * @method add hotkey event listener
+   */
+  [_addHotkeyListener] () {
+    document.addEventListener('keyup', event => {
+      if (this[_editMode]) {
+        const $info = this[_infoText];
+        const $main = this[_main];
+        const code = event.keyCode;
+        const find = this[_keys].find(key => key === code);
+
+        switch (true) {
+          case code === 27:
+            this[_editMode] = false;
+            $info.innerHTML = '';
+            $main.classList.remove('edit-mode');
+            break;
+          case find !== undefined:
+            $info.innerHTML = 'Key is used or reserved';
+            break;
+          default:
+            this[_replaceHotkey](event);
+            $main.classList.remove('edit-mode');
+        }
+      } else {
+        Object.values(this[_config].action).forEach(item => {
+          if (item.code === event.keyCode) {
+            item.callback();
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * @function change hotkey value
+   *
+   * @param {Object} event (Button click event)
+   */
+  [_changeHotkey] (event) {
+    this[_editMode] = true;
+    this[_infoText].innerHTML = 'Select New Key';
+    this[_main].classList.add('edit-mode');
+    this[_mouseEvent] = event;
+    document.activeElement.blur();
   }
 
   /**

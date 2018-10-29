@@ -17,17 +17,19 @@
       <header class="mp-header">
         <nav class="mp-navtop">
           <div class="mp-navtop__title">
-            <i class="fas fa-video"></i> Media Player Hotkey
+            <a href="/" class="mp-navtop__title--item">
+              <i class="fas fa-video"></i> Media Player Hotkey
+            </a>
           </div>
         </nav>
       </header>
-      <main id="main" class="mp-main">
-        <aside class="mp-asideleft">
+      <main id="main" class="mp-main mp-browser">
+        <aside id="asideleft" class="mp-asideleft">
           <input id="file-input" type="file" class="mp-asideleft__file">
           <div class="mp-asideleft__screen">
             <video id="video-container" class="mp-asideleft__screen--video"></video>
           </div>
-          <div class="mp-asideleft__action">
+          <div id="action-btns" class="mp-asideleft__action">
             <button id="play-btn" class="mp-asideleft__action--button" title="Play" disabled>
               <i class="fas fa-play"></i>
             </button>
@@ -37,12 +39,30 @@
             <button id="stop-btn" class="mp-asideleft__action--button" title="Stop" disabled>
               <i class="fas fa-stop"></i>
             </button>
+            <button id="restart-btn" class="mp-asideleft__action--button hidden" title="Restart">
+              <i class="fas fa-redo"></i>
+            </button>
+            <button id="prev-frame-btn" class="mp-asideleft__action--button hidden" title="Previous Frame">
+              <i class="fas fa-backward"></i>
+            </button>
+            <button id="next-frame-btn" class="mp-asideleft__action--button hidden" title="Next Frame">
+              <i class="fas fa-forward"></i>
+            </button>
+            <button id="inc-volume-btn" class="mp-asideleft__action--button hidden" title="Volume +">
+              <i class="fas fa-volume-up"></i>
+            </button>
+            <button id="dec-volume-btn" class="mp-asideleft__action--button hidden" title="Volume -">
+              <i class="fas fa-volume-down"></i>
+            </button>
             <button id="open-btn" class="mp-asideleft__action--button" title="Open">
               <i class="fas fa-eject"></i>
             </button>
+            <button id="full-screen-btn" class="mp-asideleft__action--button" title="Full Screen" disabled>
+              <i class="fas fa-expand"></i>
+            </button>
           </div>
         </aside>
-        <aside class="mp-asideright">
+        <aside id="asideright" class="mp-asideright">
           <div class="mp-asideright__settings">
             <h1 class="mp-asideright__settings--title">Settings:</h1>
             <table id="settings-table" class="mp-asideright__settings--table">
