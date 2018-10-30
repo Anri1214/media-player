@@ -1,5 +1,8 @@
+import { Config } from './Config';
+import { Selector } from './Selector';
+
 /**
- * @const {Symbol} (Hotkey class private methods)
+ * @const {Symbol} (Device class private methods)
  */
 const _checkDevice = Symbol('checkDevice');
 
@@ -15,20 +18,25 @@ export class Device {
    * @method check application device
    */
   [_checkDevice] () {
-    const $nextFrameBtn = document.getElementById('next-frame-btn');
-    const $prevFrameBtn = document.getElementById('prev-frame-btn');
-    const $decVolumeBtn = document.getElementById('dec-volume-btn');
-    const $incVolumeBtn = document.getElementById('inc-volume-btn');
-    const btns = [$nextFrameBtn, $prevFrameBtn, $decVolumeBtn, $incVolumeBtn];
-    const list = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    const devices = Config.get('device');
+    const mobileBtns = Config.get('button').mobile;
+    const selector = new Selector();
 
-    if (list.test(navigator.userAgent)) {
-      const $main = document.getElementById('main');
+    if (devices.test(navigator.userAgent)) {
+      const mainId = selector.get('id', 'main');
+      const $main = document.getElementById(mainId);
+      const browserClass = selector.get('className', 'browser');
+      const mobileClass = selector.get('className', 'mobile');
 
-      $main.classList.remove('mp-browser');
-      $main.classList.add('mp-mobile');
+      $main.classList.remove(browserClass);
+      $main.classList.add(mobileClass);
 
-      btns.forEach(btn => btn.classList.remove('hidden'));
+      mobileBtns.forEach(key => {
+        const hiddenClass = selector.get('className', 'hidden');
+        const id = selector.get('id', key);
+
+        document.getElementById(id).classList.remove(hiddenClass);
+      });
     }
   }
 }

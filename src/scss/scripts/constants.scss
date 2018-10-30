@@ -11,6 +11,7 @@ $aside-media-bg-width: 70%;
 $aside-media-sm-width: 30%;
 
 $asideleft-action-height: 80px;
+$asideleft-screen-width: calc(100% - #{$nav-size} * 2);
 $asideleft-width: 70%;
 
 $asideright-settings-font: 16px;
