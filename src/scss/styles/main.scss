@@ -107,19 +107,19 @@
         }
 
         &-col-1 {
-          @extend %table-row;
+          @extend %table-col;
 
           width: 300px;
         }
 
         &-col-2 {
-          @extend %table-row;
+          @extend %table-col;
 
           width: 200px;
         }
 
         &-col-3 {
-          @extend %table-row;
+          @extend %table-col;
 
           width: 100px;
         }
