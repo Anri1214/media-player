@@ -129,11 +129,18 @@
     &__info {
       @include flex();
 
-      animation: blinker 1s linear infinite;
-      color: #f00;
       height: $asideleft-action-height;
 
+      &--title {
+        display: none;
+        height: $asideright-settings-title;
+      }
+
       &--item {
+        @include flex();
+
+        animation: blinker 1s linear infinite;
+        color: #f00;
         text-align: center;
       }
     }
@@ -202,8 +209,35 @@
       }
 
       &__info {
-        height: 100%;
+        flex-direction: column;
+        height: $asideright-settings-media-sm-height - $nav-size;
         width: $aside-media-sm-width;
+
+        &--title {
+          display: block;
+        }
+
+        &--item {
+          height: calc(#{$asideright-settings-media-sm-height} - #{$asideright-settings-title});
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .mp-mobile {
+    .mp-asideleft {
+      @include asideleft-height(0);
+
+      &__action {
+        height: calc(#{$asideleft-action-height} * 2);
+      }
+
+      &__screen {
+        @include asideleft-screen-height($asideleft-action-height * 2);
+
+        width: $asideleft-screen-width;
       }
     }
   }
@@ -232,6 +266,42 @@
 
       &__info {
         width: 100%;
+
+        &--title {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 565px) {
+  .mp-mobile {
+    .mp-asideleft {
+      &__action {
+        height: calc(#{$asideleft-action-height} * 1.5);
+
+        &--button {
+          @include button(22px, 40px);
+        }
+      }
+
+      &__screen {
+        @include asideleft-screen-height($asideleft-action-height * 1.5);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .mp-mobile {
+    .mp-asideleft {
+      &__action {
+        height: calc(#{$asideleft-action-height} * 2.5);
+      }
+
+      &__screen {
+        @include asideleft-screen-height($asideleft-action-height * 2.5);
       }
     }
   }
@@ -267,7 +337,7 @@
         @include asideleft-screen-height($asideright-settings-media-xs-height);
 
         margin: #{$nav-size} #{$nav-size} 0 #{$nav-size};
-        width: calc(100% - #{$nav-size} * 2);
+        width: $asideleft-screen-width;
       }
     }
 
@@ -278,7 +348,7 @@
       &__settings {
         &--table {
           &-body {
-            @include asideright-body-height(13);
+            @include asideright-body-height(18);
           }
         }
       }
@@ -309,6 +379,24 @@
 
       &__info {
         display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-height: 400px) and (max-width: 1020px) {
+  .mp-mobile {
+    .mp-asideleft {
+      &__action {
+        height: calc(#{$asideleft-action-height} * 1.5);
+
+        &--button {
+          @include button(22px, 40px);
+        }
+      }
+
+      &__screen {
+        @include asideleft-screen-height($asideleft-action-height * 1.5);
       }
     }
   }

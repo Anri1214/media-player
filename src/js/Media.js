@@ -1,137 +1,34 @@
-/**
- * @const {Object} ACTION_BUTTONS (Media player action buttons configuration)
- */
-const ACTION_BUTTONS = {
-  play: {
-    icon: 'play',
-    title: 'Play',
-    disabled: true,
-    hidden: false,
-  },
-  pause: {
-    icon: 'pause',
-    title: 'Pause',
-    disabled: true,
-    hidden: false,
-  },
-  stop: {
-    icon: 'stop',
-    title: 'Stop',
-    disabled: true,
-    hidden: false,
-  },
-  restart: {
-    icon: 'redo',
-    title: 'Restart',
-    disabled: false,
-    hidden: true,
-  },
-  prevFrame: {
-    icon: 'backward',
-    title: 'Previous Frame',
-    disabled: false,
-    hidden: true,
-  },
-  nextFrame: {
-    icon: 'forward',
-    title: 'Next Frame',
-    disabled: false,
-    hidden: true,
-  },
-  incVolume: {
-    icon: 'volume-up',
-    title: 'Volume +',
-    disabled: false,
-    hidden: true,
-  },
-  decVolume: {
-    icon: 'volume-down',
-    title: 'Volume -',
-    disabled: false,
-    hidden: true,
-  },
-  open: {
-    icon: 'eject',
-    title: 'Open',
-    disabled: false,
-    hidden: false,
-  },
-  fullScreen: {
-    icon: 'expan',
-    title: 'Full Screen',
-    disabled: true,
-    hidden: false,
-  }
-};
-
-/**
- * @const {Array} FILE_TYPES (List with media player file types)
- */
-const FILE_TYPES = [
-  'video/ogg',
-  'video/mp4',
-  'video/webm'
-];
-
-/**
- * @const {Object} ID (Media player ID list in DOM)
- */
-const ID = {
-  actions: 'action-btns',
-  decVolume: 'dec-volume-btn',
-  file: 'file-input',
-  fullScreen: 'full-screen-btn',
-  incVolume: 'inc-volume-btn',
-  info: 'info-text',
-  nextFrame: 'next-frame-btn',
-  open: 'open-btn',
-  pause: 'pause-btn',
-  play: 'play-btn',
-  prevFrame: 'prev-frame-btn',
-  restart: 'restart-btn',
-  stop: 'stop-btn',
-  video: 'video-container'
-};
-
-/**
- * @const {Object} SPEED (Media player speed parameters)
- */
-const SPEED = {
-  max: 12,
-  min: 0,
-  muted: 3,
-  normal: 1,
-  step: 0.5
-};
-
-/**
- * @const {Object} VOLUME (Media player volume parameters)
- */
-const VOLUME = {
-  max: 1,
-  min: 0,
-  step: 0.1
-};
+import { Config } from './Config';
+import { Selector } from './Selector';
 
 /**
  * @const {Symbol} (Media class private properties)
  */
+const _decSpeedBtn = Symbol('decSpeedBtn');
+const _decVolumeBtn = Symbol('decVolumeBtn');
 const _fileInput = Symbol('fileInput');
-const _infoText = Symbol('infoText');
 const _fullScreenBtn = Symbol('fullScreenBtn');
-const _nextFrameBtn = Symbol('nextFrameBtn');
-const _prevFrameBtn = Symbol('prevFrameBtn');
-const _decVolumeBtn = Symbol('incVolumeBtn');
+const _incSpeedBtn = Symbol('incSpeedBtn');
 const _incVolumeBtn = Symbol('incVolumeBtn');
-const _playBtn = Symbol('playBtn');
-const _pauseBtn = Symbol('pauseBtn');
-const _stopBtn = Symbol('stopBtn');
+const _infoText = Symbol('infoText');
+const _mutedBtn = Symbol('mutedBtn');
+const _nextFrameBtn = Symbol('nextFrameBtn');
+const _normalSpeedBtn = Symbol('normalSpeedBtn');
 const _openBtn = Symbol('openBtn');
+const _pauseBtn = Symbol('pauseBtn');
+const _playBtn = Symbol('playBtn');
+const _prevFrameBtn = Symbol('prevFrameBtn');
+const _restartBtn = Symbol('restartBtn');
+const _speed = Symbol('speed');
+const _stopBtn = Symbol('stopBtn');
+const _turboSpeedBtn = Symbol('turboSpeedBtn');
 const _video = Symbol('video');
+const _volume = Symbol('volume');
 
 /**
  * @const {Symbol} (Media class private methods)
  */
+const _changeSound = Symbol('changeSound');
 const _disableBtns = Symbol('disableBtns');
 const _enableBtns = Symbol('enableBtns');
 const _initActions = Symbol('initActions');
@@ -151,19 +48,11 @@ const _validType = Symbol('validType');
  */
 export class Media {
   constructor () {
+    this.selector = new Selector();
     this[_initActions]();
     this[_initProps]();
     this[_initAttrs]();
     this[_initEvents]();
-  }
-
-  /**
-   * @method get media player elements ID parameters
-   *
-   * @return {Object}
-   */
-  getId () {
-    return ID;
   }
 
   /**
@@ -172,30 +61,16 @@ export class Media {
   decSpeed () {
     const $speed = this[_video].playbackRate;
 
-    this[_setSpeed]($speed - SPEED.step);
+    this[_setSpeed]($speed - this[_speed].step);
   }
 
   /**
-   * @method increase video speed
+   * @method decrease video volume
    */
-  incSpeed () {
-    const $speed = this[_video].playbackRate;
+  decVolume () {
+    const $volume = this[_video].volume;
 
-    this[_setSpeed]($speed + SPEED.step);
-  }
-
-  /**
-   * @method play video in normal speed
-   */
-  normalSpeed () {
-    this[_setSpeed](SPEED.normal);
-  }
-
-  /**
-   * @method pla video in turbo speed
-   */
-  turboSpeed () {
-    this[_setSpeed](SPEED.max);
+    this[_setVolume]($volume - this[_volume].step);
   }
 
   /**
@@ -206,6 +81,45 @@ export class Media {
   }
 
   /**
+   * @method increase video speed
+   */
+  incSpeed () {
+    const $speed = this[_video].playbackRate;
+
+    this[_setSpeed]($speed + this[_speed].step);
+  }
+
+  /**
+   * @method increase video volume
+   */
+  incVolume () {
+    const $volume = this[_video].volume;
+
+    this[_setVolume]($volume + this[_volume].step);
+  }
+
+  /**
+   * @method enable or disable volume
+   */
+  muted () {
+    const $video = this[_video];
+
+    if ($video.playbackRate <= this[_speed].muted) {
+      $video.muted = !$video.muted;
+      this[_changeSound]();
+    }
+  }
+
+  /**
+   * @method set video to next frame
+   */
+  nextFrame () {
+    if (this[_video].src) {
+      this[_setFrame](1);
+    }
+  }
+
+  /**
    * @method view video in normal screen mode
    */
   normalScreen () {
@@ -213,17 +127,10 @@ export class Media {
   }
 
   /**
-   * @method set video to next frame
+   * @method play video in normal speed
    */
-  nextFrame () {
-    this[_setFrame](1);
-  }
-
-  /**
-   * @method set video to previous frame
-   */
-  prevFrame () {
-    this[_setFrame](-1);
+  normalSpeed () {
+    this[_setSpeed](this[_speed].normal);
   }
 
   /**
@@ -238,24 +145,52 @@ export class Media {
    * @method pause video
    */
   pause () {
-    const disableBtns = [this[_pauseBtn]];
-    const enableBtns = [this[_playBtn]];
+    const $video = this[_video];
 
-    this[_video].pause();
-    this[_disableBtns](disableBtns);
-    this[_enableBtns](enableBtns);
+    if ($video.src) {
+      const disableBtns = [this[_pauseBtn]];
+      const enableBtns = [this[_playBtn]];
+
+      $video.pause();
+      this[_disableBtns](disableBtns);
+      this[_enableBtns](enableBtns);
+    }
   }
 
   /**
    * @method play video
    */
   play () {
-    const disableBtns = [this[_playBtn]];
-    const enableBtns = [this[_pauseBtn], this[_stopBtn], this[_fullScreenBtn]];
+    const $video = this[_video];
 
-    this[_video].play();
-    this[_disableBtns](disableBtns);
-    this[_enableBtns](enableBtns);
+    if ($video.src) {
+      const disableBtns = [this[_playBtn]];
+      const enableBtns = [
+        this[_decSpeedBtn],
+        this[_incSpeedBtn],
+        this[_normalSpeedBtn],
+        this[_turboSpeedBtn],
+        this[_fullScreenBtn],
+        this[_nextFrameBtn],
+        this[_prevFrameBtn],
+        this[_pauseBtn],
+        this[_restartBtn],
+        this[_stopBtn]
+      ];
+
+      $video.play();
+      this[_disableBtns](disableBtns);
+      this[_enableBtns](enableBtns);
+    }
+  }
+
+  /**
+   * @method set video to previous frame
+   */
+  prevFrame () {
+    if (this[_video].src) {
+      this[_setFrame](-1);
+    }
   }
 
   /**
@@ -270,59 +205,47 @@ export class Media {
    * @method stop video and rewind to start
    */
   stop () {
-    const disableBtns = [this[_pauseBtn], this[_stopBtn]];
-    const enableBtns = [this[_playBtn]];
-
-    this.pause();
-    this[_video].currentTime = 0;
-    this[_disableBtns](disableBtns);
-    this[_enableBtns](enableBtns);
-  }
-
-  /**
-   * @method decrease video volume
-   */
-  decVolume () {
-    const $volume = this[_video].volume;
-
-    this[_setVolume]($volume - VOLUME.step);
-  }
-
-  /**
-   * @method increase video volume
-   */
-  incVolume () {
-    const $volume = this[_video].volume;
-
-    this[_setVolume]($volume + VOLUME.step);
-  }
-
-  /**
-   * @method enable or disable volume
-   */
-  muted () {
     const $video = this[_video];
 
-    if ($video.playbackRate <= SPEED.muted) {
-      this[_video].muted = !this[_video].muted;
+    if ($video.src) {
+      const disableBtns = [this[_pauseBtn], this[_stopBtn]];
+      const enableBtns = [this[_playBtn]];
+
+      this.pause();
+      $video.currentTime = 0;
+      this[_disableBtns](disableBtns);
+      this[_enableBtns](enableBtns);
     }
+  }
+
+  /**
+   * @method pla video in turbo speed
+   */
+  turboSpeed () {
+    this[_setSpeed](this[_speed].max);
   }
 
   /**
    * @method initialization Media action buttons
    */
   [_initActions] () {
-    const $actions = document.getElementById(ID.actions);
+    const id = this.selector.get('id');
+    const $actions = document.getElementById(id.actions);
+    const config = Config.get('button');
+    const params = config.params;
 
-    Object.keys(ACTION_BUTTONS).forEach(key => {
+    config.view.forEach(key => {
       const $btn = document.createElement('BUTTON');
-      const param = ACTION_BUTTONS[key];
-      const hidden = param.hidden ? 'hidden' : '';
-      const className = `mp-asideleft__action--button ${hidden}`;
+      const actionClass = this.selector.get('className', 'action');
+      const hiddenClass = this.selector.get('className', 'hidden');
+      const param = params[key];
+      const hidden = param.hidden ? hiddenClass : '';
 
-      $btn.setAttribute('id', ID[key]);
-      $btn.setAttribute('class', className);
+      this[key] = this[key].bind(this);
+      $btn.setAttribute('id', id[key]);
+      $btn.setAttribute('class', `${actionClass} ${hidden}`);
       $btn.setAttribute('title', param.title);
+      $btn.onclick = this[key];
       $btn.innerHTML = `<i class="fas fa-${param.icon}"></i>`;
 
       if (param.disabled) {
@@ -334,44 +257,10 @@ export class Media {
   }
 
   /**
-   * @method initialization Media class properties
-   */
-  [_initProps] () {
-    this[_fileInput] = document.getElementById(ID.file);
-    this[_infoText] = document.getElementById(ID.info);
-    this[_fullScreenBtn] = document.getElementById(ID.fullScreen);
-    this[_nextFrameBtn] = document.getElementById(ID.nextFrame);
-    this[_prevFrameBtn] = document.getElementById(ID.prevFrame);
-    this[_decVolumeBtn] = document.getElementById(ID.decVolume);
-    this[_incVolumeBtn] = document.getElementById(ID.incVolume);
-    this[_openBtn] = document.getElementById(ID.open);
-    this[_playBtn] = document.getElementById(ID.play);
-    this[_pauseBtn] = document.getElementById(ID.pause);
-    this[_stopBtn] = document.getElementById(ID.stop);
-    this[_video] = document.getElementById(ID.video);
-    this.decSpeed = this.decSpeed.bind(this);
-    this.incSpeed = this.incSpeed.bind(this);
-    this.normalSpeed = this.normalSpeed.bind(this);
-    this.turboSpeed = this.turboSpeed.bind(this);
-    this.fullScreen = this.fullScreen.bind(this);
-    this.normalScreen = this.normalScreen.bind(this);
-    this.nextFrame = this.nextFrame.bind(this);
-    this.prevFrame = this.prevFrame.bind(this);
-    this.open = this.open.bind(this);
-    this.play = this.play.bind(this);
-    this.pause = this.pause.bind(this);
-    this.restart = this.restart.bind(this);
-    this.stop = this.stop.bind(this);
-    this.decVolume = this.decVolume.bind(this);
-    this.incVolume = this.incVolume.bind(this);
-    this.muted = this.muted.bind(this);
-  }
-
-  /**
    * @method initialization media player attributes
    */
   [_initAttrs] () {
-    const types = FILE_TYPES.map(type => type.replace('video/', '.'));
+    const types = Config.get('file').map(type => type.replace('video/', '.'));
 
     this[_fileInput].setAttribute('accept', types.toString());
     this[_video].controls = true;
@@ -381,19 +270,60 @@ export class Media {
    * @method initialization media player events
    */
   [_initEvents] () {
+    const $video = this[_video];
+
     this[_fileInput].onchange = this[_setSource].bind(this);
-    this[_fullScreenBtn].onclick = this.fullScreen;
-    this[_nextFrameBtn].onclick = this.nextFrame;
-    this[_prevFrameBtn].onclick = this.prevFrame;
-    this[_decVolumeBtn].onclick = this.decVolume;
-    this[_incVolumeBtn].onclick = this.incVolume;
-    this[_openBtn].onclick = this.open;
-    this[_playBtn].onclick = this.play;
-    this[_pauseBtn].onclick = this.pause;
-    this[_stopBtn].onclick = this.stop;
-    this[_video].onended = this[_endVideo].bind(this);
-    this[_video].onpause = this.pause;
-    this[_video].onplay = this.play;
+    $video.onended = this[_endVideo].bind(this);
+    $video.onvolumechange = this[_changeSound].bind(this);
+    $video.onpause = this.pause;
+    $video.onplay = this.play;
+  }
+
+  /**
+   * @method initialization Media class properties
+   */
+  [_initProps] () {
+    const id = this.selector.get('id');
+
+    this[_decSpeedBtn] = document.getElementById(id.decSpeed);
+    this[_decVolumeBtn] = document.getElementById(id.decVolume);
+    this[_fileInput] = document.getElementById(id.file);
+    this[_fullScreenBtn] = document.getElementById(id.fullScreen);
+    this[_incSpeedBtn] = document.getElementById(id.incSpeed);
+    this[_incVolumeBtn] = document.getElementById(id.incVolume);
+    this[_infoText] = document.getElementById(id.info);
+    this[_mutedBtn] = document.getElementById(id.muted);
+    this[_nextFrameBtn] = document.getElementById(id.nextFrame);
+    this[_normalSpeedBtn] = document.getElementById(id.normalSpeed);
+    this[_openBtn] = document.getElementById(id.open);
+    this[_pauseBtn] = document.getElementById(id.pause);
+    this[_playBtn] = document.getElementById(id.play);
+    this[_prevFrameBtn] = document.getElementById(id.prevFrame);
+    this[_restartBtn] = document.getElementById(id.restart);
+    this[_stopBtn] = document.getElementById(id.stop);
+    this[_turboSpeedBtn] = document.getElementById(id.turboSpeed);
+    this[_video] = document.getElementById(id.video);
+    this[_speed] = Config.get('speed');
+    this[_volume] = Config.get('volume');
+  }
+
+  /**
+   * @method change video sound
+   */
+  [_changeSound] () {
+    const $muted = this[_mutedBtn];
+    const $video = this[_video];
+    const btns = [this[_decVolumeBtn], this[_incVolumeBtn]];
+    const mutedOnClass = this.selector.get('className', 'mutedOn');
+    const mutedOffClass = this.selector.get('className', 'mutedOff');
+
+    if ($video.muted) {
+      $muted.innerHTML = `<i class="fas ${mutedOnClass}"></i>`;
+      this[_disableBtns](btns);
+    } else {
+      $muted.innerHTML = `<i class="fas ${mutedOffClass}"></i>`;
+      this[_enableBtns](btns);
+    }
   }
 
   /**
@@ -471,7 +401,13 @@ export class Media {
       $video.src = URL.createObjectURL(this[_fileInput].files[0]);
       this.play();
     } else {
-      const disbaleBtns = [this[_playBtn], this[_fullScreenBtn]];
+      const disbaleBtns = [
+        this[_fullScreenBtn],
+        this[_nextFrameBtn],
+        this[_prevFrameBtn],
+        this[_playBtn],
+        this[_restartBtn],
+      ];
 
       this.stop();
       this[_disableBtns](disbaleBtns);
@@ -487,16 +423,17 @@ export class Media {
    */
   [_setSpeed] (val) {
     const $video = this[_video];
+    const speed = this[_speed];
 
     if ($video.src) {
-      $video.muted = val > SPEED.muted;
+      $video.muted = val > speed.muted;
 
       switch (true) {
-        case val < SPEED.min:
-          $video.playbackRate = SPEED.min;
+        case val < speed.min:
+          $video.playbackRate = speed.min;
           break;
-        case val > SPEED.max:
-          $video.playbackRate = SPEED.max;
+        case val > speed.max:
+          $video.playbackRate = speed.max;
           break;
         default:
           $video.playbackRate = val;
@@ -515,13 +452,14 @@ export class Media {
    */
   [_setVolume] (val) {
     const $video = this[_video];
+    const volume = this[_volume];
 
     switch (true) {
-      case val < VOLUME.min:
-        $video.volume = VOLUME.min;
+      case val < volume.min:
+        $video.volume = volume.min;
         break;
-      case val > VOLUME.max:
-        $video.volume = VOLUME.max;
+      case val > volume.max:
+        $video.volume = volume.max;
         break;
       default:
         $video.volume = val;
@@ -537,6 +475,6 @@ export class Media {
     const $file = this[_fileInput].files[0];
     const type = $file ? $file.type : '';
 
-    return FILE_TYPES.includes(type);
+    return Config.get('file').includes(type);
   }
 }
