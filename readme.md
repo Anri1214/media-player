@@ -19,7 +19,7 @@ Main functional is:
 - fullscreen mode
 - etc.
 
-[Demo]()
+[Demo](https://anri1214.github.io/media-player/)
 
 ## Getting Started
 
@@ -57,7 +57,7 @@ $ npm run test
 
 Use [Travis Ci](https://travis-ci.org/) for deployment. 
 After merge changes into master branch the application will be automatically deployment in to the server 
-([Media Player Hotkey Demo]()).
+([Media Player Hotkey Demo](https://anri1214.github.io/media-player/)).
 
 ## Contributing
 
