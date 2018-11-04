@@ -57,7 +57,7 @@ $ npm run test
 
 Use [Travis Ci](https://travis-ci.org/) for deployment. 
 After merge changes into master branch the application will be automatically deployment in to the server 
-([ToDoList Demo]()).
+([Media Player Hotkey Demo]()).
 
 ## Contributing
 
