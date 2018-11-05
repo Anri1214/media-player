@@ -1,47 +1,35 @@
-# Contributing
-We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:
+Contribution process overview
 
-- Reporting a bug
-- Discussing the current state of the code
-- Submitting a fix
-- Proposing new features
-- Becoming a maintainer
+Fork this project.
+Create a feature branch.
+Make your changes.
+Run the application locally
+Run the tests.
+Push your changes to your fork/branch.
+Open a pull request.
 
-## We Develop with Github
-We use github to host code, to track issues and feature requests, as well as accept pull requests.
+1. **Fork.**
+Click the fork button up top. Clone your fork locally.
 
-## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
-Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
+2. **Create a feature branch.**
+Create and switch to a new feature branch: git checkout -b {branch_name} upstream/master (replace {branch_name} with a meaningful name that describes your feature or change).
 
-1. Fork the repo and create your branch from `master`.
-2. If you've added code that should be tested, add tests.
-3. If you've changed APIs, update the documentation.
-4. Ensure the test suite passes.
-5. Make sure your code lints.
-6. Issue that pull request!
+3. **Make your changes.**
+Now that you have a new branch you can edit/create/delete files.
+Use touch-up commits using git commit --amend. (You may use git force push after that).
 
-## Any contributions you make will be under the MIT Software License
-In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
+4. **Run the application locally.**
+Install the dependencies: npm install.
+Start the local development server: npm start.
 
-## Report bugs using Github's [issues](https://github.com/briandk/transcriptase-atom/issues)
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
+5. **Run the tests.**
+Run tests: npm test.
+Run lint: npm run lint.
+Run stylelint: npm run stylelint.
 
-## Write bug reports with detail, background, and sample code
-**Great Bug Reports** tend to have:
+6. **Push your changes to your fork/branch**
+After lint and all tests pass, push the changes to your fork/branch on GitHub: git push origin {branch_name}.
+For force push, which will destroy previous commits on the server, use --force (or -f) option.
 
-- A quick summary and/or background
-- Steps to reproduce
-  - Be specific!
-  - Give sample code if you can. 
-- What you expected would happen
-- What actually happens
-- Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
-
-People *love* thorough bug reports. I'm not even kidding.
-
-## Use a Consistent Coding Style
-* You can try running `npm run lint` for `.js` files style unification
-* You can try running `npm run styleling` or `npm run sass:lint` for `.scss` files style unification
-
-## License
-By contributing, you agree that your contributions will be licensed under its MIT License.
+7. **Create a pull request**
+Create a pull request on GitHub for your feature branch.
