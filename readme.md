@@ -89,4 +89,8 @@ Please read [CONTRIBUTING.md](https://github.com/anri1214/media-player/blob/mast
 
 ## Issue template
 
-* [Issue template](https://github.com/anri1214/media-player/blob/master/issue_template.md)
+* **[Issue template](https://github.com/anri1214/media-player/blob/master/issue_template.md)**
+
+## Pull Request template
+
+* **[Pull Request template](https://github.com/anri1214/media-player/blob/master/pull_request_template.md)**
