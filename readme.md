@@ -87,6 +87,6 @@ Please read [CONTRIBUTING.md](https://github.com/anri1214/media-player/blob/mast
 
 * **[Mockflow service](https://wireframepro.mockflow.com/view/M230f6acfc3184da7e1e6a82fcf2f4c781539610103309#/page/95dffbcd0ca04add84cd840288ab7fb5)**
 
-## License
+## Issue template
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+* [Issue template](https://github.com/anri1214/media-player/blob/master/issue_template.md)
