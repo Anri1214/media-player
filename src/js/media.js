@@ -1,5 +1,5 @@
-import { Config } from './Config';
-import { Selector } from './Selector';
+import { Config } from './config';
+import { Selector } from './selector';
 
 /**
  * @const {Symbol} (Media class private properties)

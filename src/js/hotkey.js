@@ -1,6 +1,6 @@
-import { Config } from './Config';
-import { Media } from './Media';
-import { Selector } from './Selector';
+import { Config } from './config';
+import { Media } from './media';
+import { Selector } from './selector';
 
 /**
  * @const {Symbol} (Hotkey class private properties)
