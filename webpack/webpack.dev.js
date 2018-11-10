@@ -1,10 +1,13 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
   entry: [
-    './src/main.js'
+    './src/main.js',
+    './src/scss/index.scss'
   ],
   output: {
     filename: 'bundle.js',
@@ -25,24 +28,52 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader' // creates style nodes from JS strings
+            loader: MiniCssExtractPlugin.loader,
+            options: {}
           },
           {
-            loader: 'css-loader', // translates CSS into CommonJS
-            query: {
-              //modules: true,
-              camelCase: true,
-              //localIdentName: '[name]__[local]___[hash:base64:5]'
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              url: false
             }
           },
           {
-            loader: 'sass-loader' // compiles Sass to CSS
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              sourceMap: true,
+              plugins: () => [
+                require('cssnano')({
+                  preset: ['default', {
+                    discardComments: {
+                      removeAll: true,
+                    },
+                  }]
+                })
+              ]
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
           }
         ]
       }
     ]
   },
   plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: './src/fonts',
+        to: './fonts'
+      }
+    ]),
+    new MiniCssExtractPlugin({
+      filename: './css/style.bundle.css'
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve('./index.html')
     }),
