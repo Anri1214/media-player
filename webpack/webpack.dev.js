@@ -18,7 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.js?$/,
-        exclude: [/(node_modules)/, /\.spec\.js$/],
+        exclude: [/(node_modules)/, /\.spec\.js$/, /(sw)/],
         include: [
           path.resolve(__dirname, '../js')
         ],
@@ -69,6 +69,10 @@ module.exports = {
       {
         from: './src/fonts',
         to: './fonts'
+      },
+      {
+        from: './src/js/sw',
+        to: './'
       }
     ]),
     new MiniCssExtractPlugin({
