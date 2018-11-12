@@ -1,14 +1,27 @@
+/**
+ * @const {String} VERSION - Service worker version.
+ */
 const VERSION = 'v1';
 
+/**
+ * @function add event listener for install service worker.
+ */
 self.addEventListener('install', event => {
   event.waitUntil(precache());
 });
 
+/**
+ * @function add event listener for fetch data.
+ */
 self.addEventListener('fetch', event => {
   event.respondWith(fromCache(event.request));
   event.waitUntil(update(event.request));
 });
 
+/**
+ * @function add files to service worker cache.
+ * @return {Promise<void | never>}
+ */
 function precache () {
   return caches.open(VERSION).then(cache => {
     return cache.addAll([
@@ -36,6 +49,11 @@ function precache () {
   });
 }
 
+/**
+ * @function get asets from service worker cache.
+ * @param {Object} request - Network request.
+ * @return {Promise<Response | never | never>}
+ */
 function fromCache (request) {
   return caches.open(VERSION).then(cache => {
     return cache.match(request).then(match => {
@@ -44,6 +62,11 @@ function fromCache (request) {
   });
 }
 
+/**
+ * @function update new assest in service worker cache.
+ * @param {Object} request - Newtwork request.
+ * @return {Promise<void | never | never>}
+ */
 function update (request) {
   return caches.open(VERSION).then(cache => {
     return fetch(request).then(response => {

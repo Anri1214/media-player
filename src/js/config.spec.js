@@ -1,7 +1,7 @@
 import * as module from './config';
 
 describe('module::', () => {
-  it('Get configuration', () => {
+  it('Test get configuration', () => {
     const tasks = [
       {
         input: 'button',
