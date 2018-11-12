@@ -136,6 +136,7 @@ const ACTION_BUTTONS = {
     'play',
     'pause',
     'stop',
+    'open',
     'restart',
     'prevFrame',
     'nextFrame',
@@ -146,7 +147,6 @@ const ACTION_BUTTONS = {
     'decSpeed',
     'turboSpeed',
     'normalSpeed',
-    'open',
     'fullScreen',
     'normalScreen'
   ]
