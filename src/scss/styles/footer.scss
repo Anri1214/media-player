@@ -3,19 +3,17 @@
 
 .mp-footer {
   & .mp-navbottom {
-    border-bottom: $nav-border;
-    border-left: $nav-border;
-    border-right: $nav-border;
-
     @include flex();
 
     background-color: $nav-background;
+    border-bottom: $nav-border;
+    border-left: $nav-border;
     border-radius: $nav-bottom-radius;
+    border-right: $nav-border;
     bottom: $nav-size;
     color: #fff;
     flex-direction: row;
-    position: absolute;
     height: $nav-height;
-    width: calc(100% - #{$nav-size} * 2);
+    width: 100%;
   }
 }
