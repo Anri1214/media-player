@@ -2,7 +2,7 @@
  * @const {Object} ACTION_BUTTONS - Media player action buttons configuration.
  * Key must be named as Media class public methods.
  */
-const ACTION_BUTTONS = {
+export const ACTION_BUTTONS = {
   index: ['title', 'code', 'action'],
   mobile: [
     'decSpeed',
@@ -153,12 +153,12 @@ const ACTION_BUTTONS = {
 /**
  * @const {String} DEVICES - Regular expression with mobile devices.
  */
-const DEVICES = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+export const DEVICES = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 
 /**
  * @const {Array} FILE_TYPES - List with media player file types.
  */
-const FILE_TYPES = [
+export const FILE_TYPES = [
   'video/ogg',
   'video/mp4',
   'video/webm'
@@ -167,7 +167,7 @@ const FILE_TYPES = [
 /**
  * @const {Object} KEYBOARD_CODE - List with keyboard codes.
  */
-const KEYBOARD_CODE = {
+export const KEYBOARD_CODE = {
   3: 'Break',
   8: 'Backspace / Delete',
   9: 'Tab',
@@ -329,12 +329,12 @@ const KEYBOARD_CODE = {
 /**
  * @const {Array} RESERVED_KEYS - List with reserved keyboard keys.
  */
-const RESERVED_KEYS = [9, 13, 20, 27, 32, 35, 36, 40, 112, 114, 116, 117, 122, 123];
+export const RESERVED_KEYS = [9, 13, 20, 27, 32, 35, 36, 40, 112, 114, 116, 117, 122, 123];
 
 /**
  * @const {Object} SELECTOR - Selector configuration.
  */
-const SELECTOR = {
+export const SELECTOR = {
   className: {
     action: 'mp-asideleft__action--button',
     browser: 'mp-browser',
@@ -374,7 +374,7 @@ const SELECTOR = {
 /**
  * @const {Object} SPEED - Media player speed parameters.
  */
-const SPEED = {
+export const SPEED = {
   max: 12,
   min: 0,
   muted: 3,
@@ -385,7 +385,7 @@ const SPEED = {
 /**
  * @const {Object} VOLUME - Media player volume parameters.
  */
-const VOLUME = {
+export const VOLUME = {
   max: 1,
   min: 0,
   step: 0.1
@@ -418,6 +418,8 @@ export class Config {
         return SPEED;
       case 'volume':
         return VOLUME;
+      default:
+        return '';
     }
   }
 }
