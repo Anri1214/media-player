@@ -2,20 +2,23 @@ import { Config } from './config';
 import { Selector } from './selector';
 
 /**
- * @const {Symbol} (Device class private methods)
+ * @const {Symbol} - Device class private methods.
  */
 const _checkDevice = Symbol('checkDevice');
 
 /**
- * @class Device (Base class working with device definition)
+ * Class representing work with device definition.
  */
 export class Device {
+  /**
+   * Initialize a device object.
+   */
   constructor () {
     this[_checkDevice]();
   }
 
   /**
-   * @method check application device
+   * Check application device.
    */
   [_checkDevice] () {
     const devices = Config.get('device');

@@ -1,8 +1,6 @@
-
 /**
- * @const {Object} ACTION_BUTTONS (Media player action buttons configuration)
- *
- * (Key must be named as Media class public methods)
+ * @const {Object} ACTION_BUTTONS - Media player action buttons configuration.
+ * Key must be named as Media class public methods.
  */
 const ACTION_BUTTONS = {
   index: ['title', 'code', 'action'],
@@ -153,12 +151,12 @@ const ACTION_BUTTONS = {
 };
 
 /**
- * @const {String} DEVICES (Regular expression with mobile devices)
+ * @const {String} DEVICES - Regular expression with mobile devices.
  */
 const DEVICES = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 
 /**
- * @const {Array} FILE_TYPES (List with media player file types)
+ * @const {Array} FILE_TYPES - List with media player file types.
  */
 const FILE_TYPES = [
   'video/ogg',
@@ -167,7 +165,7 @@ const FILE_TYPES = [
 ];
 
 /**
- * @const {Object} KEYBOARD_CODE (List with keyboard codes)
+ * @const {Object} KEYBOARD_CODE - List with keyboard codes.
  */
 const KEYBOARD_CODE = {
   3: 'Break',
@@ -329,11 +327,12 @@ const KEYBOARD_CODE = {
 };
 
 /**
- * @const {Array} RESERVED_KEYS (List with reserved keyboard keys)
+ * @const {Array} RESERVED_KEYS - List with reserved keyboard keys.
  */
 const RESERVED_KEYS = [9, 13, 20, 27, 32, 35, 36, 40, 112, 114, 116, 117, 122, 123];
+
 /**
- * @const {Object} SELECTOR (Selector configuration)
+ * @const {Object} SELECTOR - Selector configuration.
  */
 const SELECTOR = {
   className: {
@@ -373,7 +372,7 @@ const SELECTOR = {
 };
 
 /**
- * @const {Object} SPEED (Media player speed parameters)
+ * @const {Object} SPEED - Media player speed parameters.
  */
 const SPEED = {
   max: 12,
@@ -384,7 +383,7 @@ const SPEED = {
 };
 
 /**
- * @const {Object} VOLUME (Media player volume parameters)
+ * @const {Object} VOLUME - Media player volume parameters.
  */
 const VOLUME = {
   max: 1,
@@ -392,12 +391,13 @@ const VOLUME = {
   step: 0.1
 };
 
+/**
+ * Class representing media player configuration.
+ */
 export class Config {
   /**
-   * @method get configuration by type
-   *
-   * @param {String} type (Configuration type)
-   *
+   * Get configuration by type
+   * @param {String} type - Configuration type.
    * @return {Object | Array | String}
    */
   static get (type) {

@@ -3,7 +3,7 @@ import { Media } from './media';
 import { Selector } from './selector';
 
 /**
- * @const {Symbol} (Hotkey class private properties)
+ * @const {Symbol} - Hotkey class private properties.
  */
 const _config = Symbol('config');
 const _editMode = Symbol('editMode');
@@ -15,7 +15,7 @@ const _mouseEvent = Symbol('mouseEvent');
 const _table = Symbol('table');
 
 /**
- * @const {Symbol} (Hotkey class private methods)
+ * @const {Symbol} - Hotkey class private methods.
  */
 const _addHotkeyListener = Symbol('addHotkeyListener');
 const _changeHotkey = Symbol('changeHotkey');
@@ -27,9 +27,12 @@ const _replaceHotkey = Symbol('replaceHotkey');
 const _sortTitle = Symbol('sortTitle');
 
 /**
- * @class Hotkey (Base class working with hotkey configuration)
+ * Class representing work with hotkey configuration.
  */
 export class Hotkey {
+  /**
+   * Initialize a hotkey object.
+   */
   constructor () {
     this.media = new Media();
     this.selector = new Selector();
@@ -41,7 +44,7 @@ export class Hotkey {
   }
 
   /**
-   * @method initialization Hotkey class properties
+   * Initialization Hotkey class properties.
    */
   [_initProps] () {
     const infoId = this.selector.get('id', 'info');
@@ -61,7 +64,7 @@ export class Hotkey {
   }
 
   /**
-   *
+   * Initialization hotkey callback.
    */
   [_initCallback] () {
     const params = this[_config].params;
@@ -72,7 +75,7 @@ export class Hotkey {
   }
 
   /**
-   * @method initialization table content
+   * Initialization table content.
    */
   [_initTable] () {
     const config = this[_config];
@@ -110,7 +113,7 @@ export class Hotkey {
   }
 
   /**
-   * @method initialization table button events
+   * Initialization table button events.
    */
   [_initTableEvents] () {
     const prefix = this.selector.get('className', 'table');
@@ -122,7 +125,7 @@ export class Hotkey {
   }
 
   /**
-   * @method add hotkey event listener
+   * Add hotkey event listener.
    */
   [_addHotkeyListener] () {
     document.addEventListener('keyup', event => {
@@ -157,9 +160,8 @@ export class Hotkey {
   }
 
   /**
-   * @function change hotkey value
-   *
-   * @param {Object} event (Button click event)
+   * Change hotkey value.
+   * @param {Object} event - Button click event.
    */
   [_changeHotkey] (event) {
     const editClass = this.selector.get('className', 'edit');
@@ -172,9 +174,8 @@ export class Hotkey {
   }
 
   /**
-   * @function replace hotkey value in configuration
-   *
-   * @param {Object} event (Hotkey event)
+   * Replace hotkey value in configuration
+   * @param {Object} event - Hotkey event.
    */
   [_replaceHotkey] (event) {
     const $mouse = this[_mouseEvent];
@@ -195,10 +196,8 @@ export class Hotkey {
   }
 
   /**
-   * @method sort action button keys by title
-   *
-   * @param {Object} params (Action button parameters)
-   *
+   * Sort action button keys by title.
+   * @param {Object} params - Action button parameters.
    * @return {Array}
    */
   [_sortTitle] (params) {

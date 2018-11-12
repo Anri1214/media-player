@@ -1,21 +1,25 @@
 import { Config } from './config';
 
 /**
- * @const {Symbol} (Selector class private properties)
+ * @const {Symbol} - Selector class private properties.
  */
 const _config = Symbol('config');
 
+/**
+ * Class representing work with DOM selector.
+ */
 export class Selector {
+  /**
+   * Initialize a selector object.
+   */
   constructor () {
     this[_config] = Config.get('selector');
   }
 
   /**
-   * @method get selector value
-   *
-   * @param {String} type (Selector type)
-   * @param {String} val (Selector value)
-   *
+   * Get selector value.
+   * @param {String} type - Selector type.
+   * @param {String} val - Selector value.
    * @return {String | Object}
    */
   get (type, val = '') {

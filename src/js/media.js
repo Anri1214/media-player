@@ -2,7 +2,7 @@ import { Config } from './config';
 import { Selector } from './selector';
 
 /**
- * @const {Symbol} (Media class private properties)
+ * @const {Symbol} - Media class private properties.
  */
 const _decSpeedBtn = Symbol('decSpeedBtn');
 const _decVolumeBtn = Symbol('decVolumeBtn');
@@ -26,7 +26,7 @@ const _video = Symbol('video');
 const _volume = Symbol('volume');
 
 /**
- * @const {Symbol} (Media class private methods)
+ * @const {Symbol} - Media class private methods.
  */
 const _changeSound = Symbol('changeSound');
 const _disableBtns = Symbol('disableBtns');
@@ -44,9 +44,12 @@ const _setVolume = Symbol('setVolume');
 const _validType = Symbol('validType');
 
 /**
- * @class Media (Base class working with media player)
+ * Class representing work with media player actions.
  */
 export class Media {
+  /**
+   * Initialize a media object.
+   */
   constructor () {
     this.selector = new Selector();
     this[_initActions]();
@@ -56,7 +59,7 @@ export class Media {
   }
 
   /**
-   * @method decrease video speed
+   * Decrease video speed.
    */
   decSpeed () {
     const $speed = this[_video].playbackRate;
@@ -65,7 +68,7 @@ export class Media {
   }
 
   /**
-   * @method decrease video volume
+   * Decrease video volume.
    */
   decVolume () {
     const $volume = this[_video].volume;
@@ -74,14 +77,14 @@ export class Media {
   }
 
   /**
-   * @method view video in full screen mode
+   * View video in full screen mode.
    */
   fullScreen () {
     this[_setScreen]('request');
   }
 
   /**
-   * @method increase video speed
+   * Increase video speed.
    */
   incSpeed () {
     const $speed = this[_video].playbackRate;
@@ -90,7 +93,7 @@ export class Media {
   }
 
   /**
-   * @method increase video volume
+   * Increase video volume.
    */
   incVolume () {
     const $volume = this[_video].volume;
@@ -99,7 +102,7 @@ export class Media {
   }
 
   /**
-   * @method enable or disable volume
+   * Enable or disable volume.
    */
   muted () {
     const $video = this[_video];
@@ -111,7 +114,7 @@ export class Media {
   }
 
   /**
-   * @method set video to next frame
+   * Set video to next frame.
    */
   nextFrame () {
     if (this[_video].src) {
@@ -120,21 +123,21 @@ export class Media {
   }
 
   /**
-   * @method view video in normal screen mode
+   * View video in normal screen mode.
    */
   normalScreen () {
     this[_setScreen]('exit');
   }
 
   /**
-   * @method play video in normal speed
+   * Play video in normal speed.
    */
   normalSpeed () {
     this[_setSpeed](this[_speed].normal);
   }
 
   /**
-   * @method open video file and auto play
+   * Open video file and auto play.
    */
   open () {
     this[_fileInput].click();
@@ -142,7 +145,7 @@ export class Media {
   }
 
   /**
-   * @method pause video
+   * Pause video.
    */
   pause () {
     const $video = this[_video];
@@ -158,7 +161,7 @@ export class Media {
   }
 
   /**
-   * @method play video
+   * Play video.
    */
   play () {
     const $video = this[_video];
@@ -185,7 +188,7 @@ export class Media {
   }
 
   /**
-   * @method set video to previous frame
+   * Set video to previous frame.
    */
   prevFrame () {
     if (this[_video].src) {
@@ -194,7 +197,7 @@ export class Media {
   }
 
   /**
-   * @method restart video
+   * Restart video.
    */
   restart () {
     this[_video].currentTime = 0;
@@ -202,7 +205,7 @@ export class Media {
   }
 
   /**
-   * @method stop video and rewind to start
+   * Stop video and rewind to start.
    */
   stop () {
     const $video = this[_video];
@@ -219,14 +222,14 @@ export class Media {
   }
 
   /**
-   * @method pla video in turbo speed
+   * Play video in turbo speed.
    */
   turboSpeed () {
     this[_setSpeed](this[_speed].max);
   }
 
   /**
-   * @method initialization Media action buttons
+   * Initialization media player action buttons.
    */
   [_initActions] () {
     const id = this.selector.get('id');
@@ -257,7 +260,7 @@ export class Media {
   }
 
   /**
-   * @method initialization media player attributes
+   * Initialization media player attributes.
    */
   [_initAttrs] () {
     const types = Config.get('file').map(type => type.replace('video/', '.'));
@@ -267,7 +270,7 @@ export class Media {
   }
 
   /**
-   * @method initialization media player events
+   * Initialization media player events.
    */
   [_initEvents] () {
     const $video = this[_video];
@@ -280,7 +283,7 @@ export class Media {
   }
 
   /**
-   * @method initialization Media class properties
+   * Initialization media player class properties.
    */
   [_initProps] () {
     const id = this.selector.get('id');
@@ -308,7 +311,7 @@ export class Media {
   }
 
   /**
-   * @method change video sound
+   * Change video sound.
    */
   [_changeSound] () {
     const $muted = this[_mutedBtn];
@@ -327,34 +330,31 @@ export class Media {
   }
 
   /**
-   * @method disable button
-   *
-   * @param {Array} btns (List with disable button elements)
+   * Disable buttons.
+   * @param {Array} btns - List with disable button elements.
    */
   [_disableBtns] (btns) {
     btns.forEach(btn => btn.setAttribute('disabled', 'disabled'));
   }
 
   /**
-   * @method enable button
-   *
-   * @param {Array} btns (List with enable button elements)
+   * Enable buttons.
+   * @param {Array} btns - List with enable button elements.
    */
   [_enableBtns] (btns) {
     btns.forEach(btn => btn.removeAttribute('disabled'));
   }
 
   /**
-   * @method end video file
+   * End video file.
    */
   [_endVideo] () {
     URL.revokeObjectURL(this[_video].src);
   }
 
   /**
-   * @method set media player frame
-   *
-   * @param {int} val (Frame value)
+   * Set media player frame.
+   * @param {int} val - Frame value.
    */
   [_setFrame] (val) {
     const frame = 1 / 24;
@@ -364,9 +364,8 @@ export class Media {
   }
 
   /**
-   * @method set media player screen mode
-   *
-   * @param {String} mode (Screen mode)
+   * Set media player screen mode.
+   * @param {String} mode - Screen mode.
    */
   [_setScreen] (mode) {
     const $video = this[_video];
@@ -389,7 +388,7 @@ export class Media {
   }
 
   /**
-   * @method set media player source
+   * Set media player source.
    */
   [_setSource] () {
     const $info = this[_infoText];
@@ -417,9 +416,8 @@ export class Media {
   }
 
   /**
-   * @method set media player video speed
-   *
-   * @param {number} val (Rate value)
+   * Set media player video speed.
+   * @param {number} val - Rate value.
    */
   [_setSpeed] (val) {
     const $video = this[_video];
@@ -446,9 +444,8 @@ export class Media {
   }
 
   /**
-   * @method set media player volume
-   *
-   * @param {int} val (Volume value)
+   * Set media player volume.
+   * @param {int} val - Volume value.
    */
   [_setVolume] (val) {
     const $video = this[_video];
@@ -467,8 +464,7 @@ export class Media {
   }
 
   /**
-   * @method validate input file format
-   *
+   * Validate input file format.
    * @return {Boolean}
    */
   [_validType] () {
