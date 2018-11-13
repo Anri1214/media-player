@@ -25,6 +25,7 @@ self.addEventListener('fetch', event => {
 function precache () {
   return caches.open(VERSION).then(cache => {
     return cache.addAll([
+      '/',
       'index.html',
       'bundle.js',
       'css/style.bundle.css',
