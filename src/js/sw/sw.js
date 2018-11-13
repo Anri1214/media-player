@@ -7,7 +7,7 @@ const VERSION = 'v1';
  * @function add event listener for install service worker.
  */
 self.addEventListener('install', event => {
-  return event.waitUntil(precache());
+  event.waitUntil(precache());
 });
 
 /**
@@ -25,6 +25,7 @@ self.addEventListener('fetch', event => {
 function precache () {
   return caches.open(VERSION).then(cache => {
     return cache.addAll([
+      '',
       'index.html',
       'bundle.js',
       'css/style.bundle.css',
