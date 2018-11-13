@@ -364,6 +364,7 @@ export const SELECTOR = {
     play: 'play-btn',
     prevFrame: 'prev-frame-btn',
     restart: 'restart-btn',
+    settings: 'settings',
     stop: 'stop-btn',
     table: 'settings-table',
     turboSpeed: 'turbo-speed-btn',

@@ -56,7 +56,7 @@
   }
 
   &.edit-mode {
-    background-color: #ffbffb;
+    background-color: #000;
   }
 
   & .mp-asideright {
@@ -123,6 +123,10 @@
 
           width: 100px;
         }
+      }
+
+      &.edit-mode {
+        background: #fff;
       }
     }
 

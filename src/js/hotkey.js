@@ -12,6 +12,7 @@ const _keyCode = Symbol('keyCode');
 const _reservedKeys = Symbol('reservedKeys');
 const _main = Symbol('main');
 const _mouseEvent = Symbol('mouseEvent');
+const _settings = Symbol('settings');
 const _table = Symbol('table');
 
 /**
@@ -49,6 +50,7 @@ export class Hotkey {
   [_initProps] () {
     const infoId = this.selector.get('id', 'info');
     const mainId = this.selector.get('id', 'main');
+    const settings = this.selector.get('id', 'settings');
     const tableId = this.selector.get('id', 'table');
 
     this[_config] = Config.get('button');
@@ -60,6 +62,7 @@ export class Hotkey {
     this[_replaceHotkey] = this[_replaceHotkey].bind(this);
     this[_infoText] = document.getElementById(infoId);
     this[_main] = document.getElementById(mainId);
+    this[_settings] = document.getElementById(settings);
     this[_table] = document.getElementById(tableId);
   }
 
@@ -132,6 +135,7 @@ export class Hotkey {
       if (this[_editMode]) {
         const $info = this[_infoText];
         const $main = this[_main];
+        const $settings = this[_settings];
         const code = event.keyCode;
         const editClass = this.selector.get('className', 'edit');
         const find = this[_reservedKeys].find(key => key === code);
@@ -141,6 +145,7 @@ export class Hotkey {
             this[_editMode] = false;
             $info.innerHTML = '';
             $main.classList.remove(editClass);
+            $settings.classList.remove(editClass);
             break;
           case find !== undefined:
             $info.innerHTML = 'Key is used or reserved';
@@ -148,6 +153,7 @@ export class Hotkey {
           default:
             this[_replaceHotkey](event);
             $main.classList.remove(editClass);
+            $settings.classList.remove(editClass);
         }
       } else {
         Object.values(this[_config].params).forEach(item => {
@@ -169,6 +175,7 @@ export class Hotkey {
     this[_editMode] = true;
     this[_infoText].innerHTML = 'Select New Key';
     this[_main].classList.add(editClass);
+    this[_settings].classList.add(editClass);
     this[_mouseEvent] = event;
     document.activeElement.blur();
   }

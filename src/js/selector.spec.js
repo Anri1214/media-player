@@ -124,6 +124,10 @@ describe('Selector::', () => {
         output: 'restart-btn'
       },
       {
+        input: 'settings',
+        output: 'settings'
+      },
+      {
         input: 'stop',
         output: 'stop-btn'
       },
