@@ -25,7 +25,6 @@ self.addEventListener('fetch', event => {
 function precache () {
   return caches.open(VERSION).then(cache => {
     return cache.addAll([
-      '/',
       'index.html',
       'bundle.js',
       'css/style.bundle.css',
@@ -46,6 +45,7 @@ function precache () {
       'fonts/fontawesome-free-5.5.0-web/webfonts/fa-solid-900.ttf',
       'fonts/fontawesome-free-5.5.0-web/webfonts/fa-solid-900.woff',
       'fonts/fontawesome-free-5.5.0-web/webfonts/fa-solid-900.woff2',
+      'manifest/manifest.json'
     ]);
   });
 }
