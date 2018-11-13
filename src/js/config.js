@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @const {Object} ACTION_BUTTONS - Media player action buttons configuration.
  * Key must be named as Media class public methods.
  */
@@ -19,7 +19,7 @@ export const ACTION_BUTTONS = {
   params: {
     decSpeed: {
       icon: 'minus',
-      title: 'Speed +',
+      title: 'Speed -',
       disabled: true,
       hidden: true,
       code: 87
@@ -40,7 +40,7 @@ export const ACTION_BUTTONS = {
     },
     incSpeed: {
       icon: 'plus',
-      title: 'Speed -',
+      title: 'Speed +',
       disabled: true,
       hidden: true,
       code: 69
