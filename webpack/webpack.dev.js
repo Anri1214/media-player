@@ -73,6 +73,10 @@ module.exports = {
       {
         from: './src/js/sw',
         to: './'
+      },
+      {
+        from: './src/manifest',
+        to: './manifest'
       }
     ]),
     new MiniCssExtractPlugin({

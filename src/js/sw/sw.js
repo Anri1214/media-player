@@ -7,7 +7,7 @@ const VERSION = 'v1';
  * @function add event listener for install service worker.
  */
 self.addEventListener('install', event => {
-  event.waitUntil(precache());
+  return event.waitUntil(precache());
 });
 
 /**
