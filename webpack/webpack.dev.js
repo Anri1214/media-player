@@ -71,12 +71,16 @@ module.exports = {
         to: './fonts'
       },
       {
+        from: './src/images',
+        to: './images'
+      },
+      {
         from: './src/js/sw',
         to: './'
       },
       {
         from: './src/manifest',
-        to: './manifest'
+        to: './'
       }
     ]),
     new MiniCssExtractPlugin({

@@ -3,22 +3,23 @@
   "name": "Media Player Hotkey",
   "icons": [
     {
-      "src": "/images/icons-192.png",
+      "src": "images/favicon-128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "images/favicon-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/icons-512.png",
+      "src": "images/favicon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "/index.html",
-  "background_color": "#000",
+  "start_url": ".",
+  "background_color": "#000000",
   "display": "standalone",
-  "scope": "/",
-  "theme_color": "#FFF",
-  "serviceworker": {
-    "src": "sw.js"
-  }
+  "theme_color": "#FFFFFF"
 }
