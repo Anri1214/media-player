@@ -43,9 +43,9 @@
 
     &__screen {
       @include flex();
+      @include asideleft-height($asideleft-action-height);
 
       background-color: #000;
-      height: calc(100vh - #{$asideleft-action-height});
       margin: #{$nav-size} #{$nav-size} 0 #{$nav-size};
 
       &--video {

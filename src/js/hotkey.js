@@ -188,7 +188,7 @@ export class Hotkey {
     const $mouse = this[_mouseEvent];
     const $target = $mouse.target;
     const code = event.keyCode;
-    const find = $mouse.path.find(elem => elem.tagName === 'TR');
+    const find = $mouse.target.parentElement.parentElement;
     const id = $target.id || $target.parentElement.id;
     const keys = this[_reservedKeys];
     const param = this[_config].params[id];
