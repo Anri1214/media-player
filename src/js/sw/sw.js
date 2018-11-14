@@ -15,12 +15,11 @@ self.addEventListener('install', event => {
  */
 self.addEventListener('fetch', event => {
   event.respondWith(fromCache(event.request));
-  event.waitUntil(update(event.request));
 });
 
 /**
  * @function add files to service worker cache.
- * @return {Promise<void | never>}
+ * @return {Promise}
  */
 function precache () {
   return caches.open(VERSION).then(cache => {
@@ -48,33 +47,33 @@ function precache () {
       'images/favicon-128.png',
       'images/favicon-192.png',
       'images/favicon-512.png',
-      'manifest.json',
+      'manifest.json'
     ]);
   });
 }
 
 /**
  * @function get asets from service worker cache.
- * @param {Object} request - Network request.
- * @return {Promise<Response | never | never>}
+ * @param {Request} request - Network request.
+ * @return {Promise}
  */
 function fromCache (request) {
-  return caches.open(VERSION).then(cache => {
-    return cache.match(request).then(match => {
-      return match || Promise.reject('no-match');
-    });
+  return caches.match(request).then(response => {
+    return response || update(request);
   });
 }
 
 /**
  * @function update new assest in service worker cache.
- * @param {Object} request - Newtwork request.
- * @return {Promise<void | never | never>}
+ * @param {Request} request - Newtwork request.
+ * @return {Promise}
  */
 function update (request) {
-  return caches.open(VERSION).then(cache => {
-    return fetch(request).then(response => {
-      return cache.put(request, response);
+  return fetch(request).then(response => {
+    return caches.open(VERSION).then(cache => {
+      cache.put(request.url, response.clone());
+
+      return response;
     });
   });
 }
